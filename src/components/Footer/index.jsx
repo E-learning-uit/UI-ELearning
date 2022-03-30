@@ -8,7 +8,7 @@ const Footer = () => {
 
 
     return (
-        <div className='fixed bottom-0 right-0 left-0 shadow-[10px_35px_60px_-15px_rgba(0,0,0,0.8)] p-[30px]'>
+        <div className=' shadow-[10px_35px_60px_0_rgba(0,0,0,0.8)] p-[30px] h-[260px]'>
             <div className=' grid grid-cols-3'>
                 <div className='col-span-1 flex flex-row items-center '>
                     <img src={logo} alt="" className='rounded-full w-[90px] h-[90px] ' />

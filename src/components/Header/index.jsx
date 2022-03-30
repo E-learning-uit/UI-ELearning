@@ -8,7 +8,7 @@ const Header = () => {
 
 
     return (
-        <div className="fixed top-0 left-0 right-0  text-[#003663] font-bold grid grid-cols-4 px-8 shadow-md h-12	">
+        <div className="fixed top-0 left-0 right-0  text-[#003663] font-bold grid grid-cols-4 px-8 shadow-md h-12 bg-white	">
             <div className='col-span-1 flex'>
                 <img src={logo} alt="" className='rounded-full w-11 flex items-center' />
                 <span className='flex items-center text-[#F7941E] text-[20px]'>E-CODE</span>

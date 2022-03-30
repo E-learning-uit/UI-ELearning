@@ -23,7 +23,7 @@ const configComponent = (component) => {
     return (
         <div>
             <Header />
-            <div className="mt-12">
+            <div className="mt-12 mb-[260px]">
                 {component}
             </div>
 

@@ -8,7 +8,7 @@ const Blog = ()=>{
     return (
         <>
 
-        <h1>blog</h1>
+        <h1>blog hihihihihih</h1>
         </>
     )
 }
