@@ -23,8 +23,9 @@ const configComponent = (component) => {
     return (
         <div>
             <Header />
-
-            {component}
+            <div className="mt-12">
+                {component}
+            </div>
 
             <Footer />
         </div>
