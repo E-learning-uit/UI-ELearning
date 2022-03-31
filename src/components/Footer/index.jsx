@@ -8,7 +8,7 @@ const Footer = () => {
 
 
     return (
-        <div className=' shadow-[10px_35px_60px_0_rgba(0,0,0,0.8)] p-[30px] h-[260px]'>
+        <div className='related bottom-0 right-0 left-0 p-[30px] h-[260px] max-h-[260px] bg-white' style={{boxShadow:' 0px -1px 0px #cecece'}}>
             <div className=' grid grid-cols-3'>
                 <div className='col-span-1 flex flex-row items-center '>
                     <img src={logo} alt="" className='rounded-full w-[90px] h-[90px] ' />
