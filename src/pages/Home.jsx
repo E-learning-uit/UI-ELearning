@@ -70,7 +70,7 @@ const Home = () => {
                 <img src={imageapp} alt="" />
             </div>
             <div>
-                <div className="mt-[48px]">
+                <div className="pt-[48px]">
                     <h2 className="text-[28px] font-medium text-[#003663]">Front-end Courses</h2>
                     <SimpleBar>
                         <div className="flex flex-row my-[24px]">
@@ -89,7 +89,7 @@ const Home = () => {
                         </div>
                     </SimpleBar>
                 </div>
-                <div className="mt-[48px]">
+                <div className="pt-[48px]">
                     <h2 className="text-[28px] font-medium text-[#003663]">Back-end Courses</h2>
                     <SimpleBar>
                         <div className="flex flex-row my-[24px]">

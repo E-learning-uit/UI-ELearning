@@ -3,6 +3,8 @@ import { useState } from 'react';
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.css';
 
+import intro from '../assets/intro.jpg'
+
 
 
 const DashBoard = ()=>{
@@ -66,9 +68,21 @@ const DashBoard = ()=>{
         },
     ])
     return(
-        <div className="py-[100px] px-[150px]">
+        <div className="py-[60px] px-[150px]">
+            <div className="grid grid-cols-[1fr_1fr] pb-12">
+                <div className="flex flex-col justify-center">
+                    <h1 className="text-[56px] leading-[52px] font-extrabold text-[#F7941E]">Learn more and make success result</h1>
+                    <h6 className="text-lg font-normal text-[#666666] mt-6" >Courses are designed for beginners, free, easy to understand content.</h6>
+                    <div>
+                        <button className="px-20 py-3 mt-10 rounded-3xl bg-[#F7941E] text-[#ffffff]">GET STARTED</button>
+                    </div>
+                </div>
+                <div className="flex flex-col items-center justify-center">
+                    <img className="w-full object-cover" src={intro} alt="" />
+                </div>
+            </div>
             <div>
-                <div className="mt-[48px]">
+                <div className="pt-[48px]">
                     <h2 className="text-[28px] font-medium text-[#003663]">Front-end Courses</h2>
                     <SimpleBar>
                         <div className="flex flex-row my-[24px]">
@@ -87,7 +101,7 @@ const DashBoard = ()=>{
                         </div>
                     </SimpleBar>
                 </div>
-                <div className="mt-[48px]">
+                <div className="pt-[48px]">
                     <h2 className="text-[28px] font-medium text-[#003663]">Back-end Courses</h2>
                     <SimpleBar>
                         <div className="flex flex-row my-[24px]">
