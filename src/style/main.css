@@ -453,12 +453,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .relative {
   position: relative;
 }
-.inset-0 {
-  top: 0px;
-  right: 0px;
-  bottom: 0px;
-  left: 0px;
-}
 .top-1\/2 {
   top: 50%;
 }
@@ -564,6 +558,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[165px\] {
   height: 165px;
 }
+.h-\[530px\] {
+  height: 530px;
+}
 .h-\[200px\] {
   height: 200px;
 }
@@ -591,6 +588,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[294px\] {
   width: 294px;
 }
+.w-10 {
+  width: 2.5rem;
+}
 .w-\[350px\] {
   width: 350px;
 }
@@ -603,9 +603,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-11 {
   width: 2.75rem;
 }
-.w-10 {
-  width: 2.5rem;
-}
 .min-w-\[350px\] {
   min-width: 350px;
 }
@@ -614,9 +611,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
-}
-.grid-cols-2 {
-  grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
@@ -677,14 +671,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .p-1 {
   padding: 0.25rem;
 }
+.p-\[2px\] {
+  padding: 2px;
+}
 .p-2 {
   padding: 0.5rem;
 }
 .p-\[30px\] {
   padding: 30px;
-}
-.p-\[2px\] {
-  padding: 2px;
 }
 .py-4 {
   padding-top: 1rem;
@@ -726,9 +720,16 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 150px;
   padding-right: 150px;
 }
+.px-\[20px\] {
+  padding-left: 20px;
+  padding-right: 20px;
+}
 .px-14 {
   padding-left: 3.5rem;
   padding-right: 3.5rem;
+}
+.pt-\[20px\] {
+  padding-top: 20px;
 }
 .text-center {
   text-align: center;
@@ -763,17 +764,11 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[28px\] {
   font-size: 28px;
 }
-.text-\[20px\] {
-  font-size: 20px;
-}
-.text-\[24px\] {
-  font-size: 24px;
-}
-.text-\[20px\] {
-  font-size: 20px;
-}
 .text-\[17px\] {
   font-size: 17px;
+}
+.text-\[20px\] {
+  font-size: 20px;
 }
 .font-bold {
   font-weight: 700;
