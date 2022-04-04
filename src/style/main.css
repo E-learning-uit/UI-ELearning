@@ -420,6 +420,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 .relative {
   position: relative;
 }
+.inset-0 {
+  top: 0px;
+  right: 0px;
+  bottom: 0px;
+  left: 0px;
+}
 .top-1\/2 {
   top: 50%;
 }
@@ -500,11 +506,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-2 {
   margin-right: 0.5rem;
 }
+.block {
+  display: block;
+}
+.inline {
+  display: inline;
+}
 .flex {
   display: flex;
 }
 .grid {
   display: grid;
+}
+.aspect-video {
+  aspect-ratio: 16 / 9;
 }
 .h-\[400px\] {
   height: 400px;
@@ -514,6 +529,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-\[165px\] {
   height: 165px;
+}
+.h-\[530px\] {
+  height: 530px;
 }
 .h-\[200px\] {
   height: 200px;
@@ -542,6 +560,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .w-\[294px\] {
   width: 294px;
 }
+.w-48 {
+  width: 12rem;
+}
 .w-\[350px\] {
   width: 350px;
 }
@@ -566,6 +587,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .grid-cols-3 {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
+.grid-cols-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
 .grid-cols-4 {
   grid-template-columns: repeat(4, minmax(0, 1fr));
 }
@@ -583,6 +607,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .justify-around {
   justify-content: space-around;
+}
+.gap-2 {
+  gap: 0.5rem;
 }
 .rounded-\[20px\] {
   border-radius: 20px;
@@ -633,6 +660,14 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 150px;
   padding-right: 150px;
 }
+.px-\[20px\] {
+  padding-left: 20px;
+  padding-right: 20px;
+}
+.py-4 {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+}
 .px-14 {
   padding-left: 3.5rem;
   padding-right: 3.5rem;
@@ -640,6 +675,13 @@ Ensure the default browser behavior of the `hidden` attribute.
 .px-8 {
   padding-left: 2rem;
   padding-right: 2rem;
+}
+.px-\[30px\] {
+  padding-left: 30px;
+  padding-right: 30px;
+}
+.pt-\[20px\] {
+  padding-top: 20px;
 }
 .text-center {
   text-align: center;
@@ -662,8 +704,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-\[16px\] {
   font-size: 16px;
 }
+.text-\[24px\] {
+  font-size: 24px;
+}
 .text-\[20px\] {
   font-size: 20px;
+}
+.text-\[17px\] {
+  font-size: 17px;
 }
 .font-bold {
   font-weight: 700;
