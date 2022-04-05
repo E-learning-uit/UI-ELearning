@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import avatar from '../assets/avatar.png'
-
+import SimpleBar from 'simplebar-react';
+import 'simplebar/dist/simplebar.css';
 
 
 
@@ -48,7 +49,8 @@ const Lesson = () => {
                     ))}
                     </div>
                 </div>
-                <div className="col-span-1">
+                <div class="col-span-1 overflow-y-auto h-[530px]">
+                
                     <p className='text-[#003663] font-bold my-4'>I - Technical concepts to know</p>
                     <div>
                         {data.map((item, index) => (

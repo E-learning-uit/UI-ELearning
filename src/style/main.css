@@ -638,6 +638,9 @@ Ensure the default browser behavior of the `hidden` attribute.
   margin-top: calc(1rem * calc(1 - var(--tw-space-y-reverse)));
   margin-bottom: calc(1rem * var(--tw-space-y-reverse));
 }
+.overflow-y-auto {
+  overflow-y: auto;
+}
 .rounded-2xl {
   border-radius: 1rem;
 }
