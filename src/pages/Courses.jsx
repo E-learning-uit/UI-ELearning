@@ -51,9 +51,9 @@ const Course = () => {
         <>
             <div className="px-[40px]">
                 <br />
-                <div className='flex justify-between'>
-                    <h1 className="text-[#003663] font-bold mb-5 text-[30px] items-center">Basic programming knowledge</h1>
-                    <button className=' bg-[orange] rounded-[20px] p-1 px-7 font-bold text-[#003663] items-center'>Bắt đầu học</button>
+                <div className='flex items-center justify-between'>
+                    <h1 className="text-[#003663] font-bold mb-5 text-[40px] items-center">{infoCourse.title}</h1>
+                    <button className=' bg-[orange] rounded-[20px]  px-7 font-bold text-[#003663] h-12 text-xl'>Discover lesson</button>
                 </div>
                 <div className="grid grid-cols-3 px-3 py-3 mt-2 rounded-lg border-2 border-slate-400">
                     <div className="col-span-2">

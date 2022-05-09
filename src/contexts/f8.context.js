@@ -16,4 +16,8 @@ export default class ELearningContext{
         const response = api.get(`/list-course/${idCourse}`);
         return response;
     }
+    async getInfoItem(idItem){
+        const response = api.get(`/list-item/${idItem}`);
+        return response;
+    }
 }

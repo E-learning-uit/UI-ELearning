@@ -1,4 +1,4 @@
 module.exports = global.config = {
-    KEY: "502392920137-puhujlu4franjjjml1sf6q8hb0vgtu4f.apps.googleusercontent.com",
+    KEY: "74969024542-1fjuemt4akob7uu8ljpffda1nt63vi53.apps.googleusercontent.com",
     API: 'http://localhost:4001'
 };

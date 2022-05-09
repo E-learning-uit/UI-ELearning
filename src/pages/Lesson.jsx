@@ -1,31 +1,34 @@
-import { useEffect, useState, useMemo } from 'react'
+import { useEffect, useState, useMemo, useRef } from 'react'
+import { useNavigate, useParams, useLocation, Link } from 'react-router-dom';
 import avatar from '../assets/avatar.png'
 import logo from '../assets/logo.png'
-import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.css';
-import { useNavigate, useParams, useLocation, Link } from 'react-router-dom';
+import ExtendFunction from '../utils/extendFunction';
+import ELearningContext from '../contexts/f8.context';
+
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import HelpIcon from '@material-ui/icons/Help';
+import FaceIcon from '@material-ui/icons/Face';
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import EventNoteIcon from '@material-ui/icons/EventNote';
 
-import PropTypes from 'prop-types';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import Box from '@material-ui/core/Box';
-
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
-import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import ExtendFunction from '../utils/extendFunction';
 
-import ELearningContext from '../contexts/f8.context';
+import SimpleBar from 'simplebar-react';
+import PropTypes from 'prop-types';
+import clsx from 'clsx';
+import ReactPlayer from 'react-player'
 
 const useStyles = makeStyles((theme) => ({
     root: {
         width: '100%',
-        color:'#c4e608'
+        color: '#c4e608'
     },
     heading: {
         fontSize: theme.typography.pxToRem(14),
@@ -41,23 +44,29 @@ const useStyles = makeStyles((theme) => ({
 
 function useQuery() {
     const { search } = useLocation();
-
     return new URLSearchParams(search);
 }
 const Lesson = () => {
     const f8Context = new ELearningContext();
     const extendFunction = new ExtendFunction();
+    const navigate = useNavigate();
     const classes = useStyles()
     const { idCourse } = useParams();
     const query = useQuery();
 
+    const [checkVideoEnd, setCheckVideoEnd] = useState(false);
     const [idItem, setIdItem] = useState('');
     const [idPart, setIdPart] = useState('');
     const [infoCourse, setInfoCourse] = useState({});
     const [listCourse, setListCourse] = useState([]);
+    const [infoItem, setInfoItem] = useState({});
+
+    const handle = (e) => {
+        console.log(e);
+    }
+
 
     useEffect(async () => {
-        console.log(query.get('idItem'));
         if (!query.get('idItem')) {
 
         }
@@ -67,24 +76,37 @@ const Lesson = () => {
         }
 
         let info = await f8Context.getInfoCourse(idCourse)
-        console.log(await info.data);
+        let infoItemCourse = await f8Context.getInfoItem(query.get('idItem'))
+        // console.log(infoItemCourse);
+        setInfoItem(infoItemCourse.data)
+
+        // console.log(await info.data);
+
+
         setInfoCourse(await info.data)
         setListCourse(await info.data.listCourse)
-    }, [])
+    }, [window.location.href])
 
+    useEffect(() => {
+        console.log(checkVideoEnd);
+    }, [checkVideoEnd])
 
     const [data, setData] = useState([
         {
-            name: 'hieu'
+            nameUser: 'hieu',
+            content: 'hieu nguyen trung dsdasdasdsadddda',
         },
         {
-            name: 'hieu'
+            nameUser: 'hieu',
+            content: 'hieu',
         },
         {
-            name: 'hieu'
+            nameUser: 'hieu',
+            content: 'hieu',
         },
         {
-            name: 'hieu'
+            nameUser: 'hieu',
+            content: 'hieu',
         },
 
     ]);
@@ -95,9 +117,9 @@ const Lesson = () => {
             {/* header */}
             <div className='sticky top-0 right-0 left-0 bg-slate-900 flex items-center justify-between px-3 z-10'>
                 <div className='flex items-center'>
-                    <ArrowBackIosIcon style={{ width: '30px', height: '30px', color: 'white' }} />
+                    <ArrowBackIosIcon style={{ width: '30px', height: '30px', color: 'white' }} onClick={() => navigate(`/course/${idCourse}`)} />
                     <img src={logo} alt="" className='w-12 h-12 rounded-full' />
-                    <p className='text-white font-semibold text-xl'>name item course</p>
+                    <p className='text-white font-semibold text-xl'>{infoCourse.title}</p>
                 </div>
                 <div className='flex items-center'>
                     <Box position="relative" display="inline-flex">
@@ -132,38 +154,53 @@ const Lesson = () => {
                 </div>
             </div>
 
-            {/* grid */}
+            {/* video */}
             <div className="grid grid-cols-4  w-full">
                 <div className="col-span-3">
-                    <div className='lesson aspect-video'>
-                        <iframe
-                            width="100%" height="530"
-                            src={`https://www.youtube.com/embed/${idItem}`}
-                            title="YouTube video player" frameborder="0"
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                            allowfullscreen
-                        ></iframe>
+                    <div className=''>
+                        <ReactPlayer
+                            width="100%" height="500px"
+                            url={`https://www.youtube.com/embed/${idItem}`}
+                            controls={true}
+                            onProgress={handle}
+                        />
                     </div>
-                    <p className='text-[#003663] font-bold my-4 text-[23px]'> What is Client-Server? </p>
-                    <p className='text-[#003663] font-bold my-4 text-[17px] pt-[20px]'>24 comments</p>
-                    <div>
-                        {data.map((item, index) => (
-                            <div className=''>
-                                <div className='flex items-center'>
-                                    <img src={avatar} alt="" className='rounded-full w-10 p-[2px]' />
-                                    <span className='px-[20px]'>Hieu Nguyen</span>
+                    <p className='text-[#003663] font-bold my-4 text-[23px] mx-2'>{infoItem.name}</p>
+                    {/* comment */}
+                    <div className='px-2 mb-3'>
+                        <p className='text-[#003663] font-bold my-4 text-[20px] pt-[20px]'>24 comments</p>
+                        <div>
+                            <div className='w-full flex items-center'>
+                                <FaceIcon style={{ width: '40px', height: '40px', color: 'orange', marginRight: '2px' }} />
+                                <div className='w-full'>
+                                    <input type="text" placeholder='Bạn có thắc mắc gì trong bài học này không ?' className='w-full p-2 ' style={{ outline: 'none' }} />
+                                    <hr />
                                 </div>
-                                <p className="text-[#666666] px-[40px] text-[15px]">Ad, I plan to learn the front-end: HTML, CSS then switch to learning the back-end: Python instead of JavaScript, because I find Python language easier to absorb, or should I learn JavaScript In advance, I have a course available at my website, thank you.</p>
                             </div>
-                        ))}
+                            <div className='flex justify-end my-1 mx-3'>
+                                <button className='hover:bg-gray-200 rounded-2xl text-gray-500 px-2 py-1 font-semibold mx-2'>Cancel</button>
+                                <button className='rounded-2xl text-white bg-orange-400 px-2 py-1 font-semibold hover:opacity-75'>Comment</button>
+                            </div>
+                        </div>
+                        <div>
+                            {data.map((item, index) => (
+                                <div className='flex my-3' key={index}>
+                                    <img src={avatar} alt="" className='rounded-full w-10 h-10 p-[2px] mx-1' />
+                                    <div className='bg-[#f2f3f5] rounded-lg'>
+                                        <p className='px-4 font-semibold text-[#b89a9b]'>Hieu Nguyen</p>
+                                        <p className="text-[#b89a9b] px-4 text-[15px]">{item.content}</p>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
                     </div>
                 </div>
                 <div class="overflow-y-auto fixed top-11 bottom-0 right-0 w-[25%]">
                     <p className='text-[#003663] font-bold text-2xl p-2'>List lessons</p>
                     {listCourse.map((list, index) => {
                         return (
-                            <div className='w-full'>
-                                <Accordion style={{backgroundColor:'#f7f8fa'}}>
+                            <div className='w-full' key={index}>
+                                <Accordion style={{ backgroundColor: '#f7f8fa' }}>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreIcon />}
                                         aria-controls="panel1a-content"
@@ -172,12 +209,15 @@ const Lesson = () => {
                                         <Typography className={classes.heading}>{extendFunction.romanize(index + 1) + '. ' + list.title}</Typography>
                                         <Typography className={classes.video}>({list.item.length} {list.item.length > 1 ? 'videos' : 'video'})</Typography>
                                     </AccordionSummary>
-                                    <AccordionDetails style={{padding:'0'}}>
+                                    <AccordionDetails style={{ padding: '0' }}>
                                         <div className='w-full'>
                                             {list.item && list.item.length !== 0 ? list.item.map((course, index) => (
                                                 <Link
+                                                    key={index}
                                                     to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id}`}
-                                                    className='flex items-center justify-end w-full px-1 cursor-pointer hover:bg-slate-300'
+                                                    className={clsx('flex items-center justify-end w-full px-1 cursor-pointer hover:bg-slate-300', {
+                                                        'bg-slate-300': idItem === course.id
+                                                    })}
                                                 >
                                                     <div className=' my-3 w-full '>
                                                         <span className='mx-2 text-xs font-bold'>{index + 1}.</span>
