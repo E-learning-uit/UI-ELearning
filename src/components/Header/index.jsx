@@ -1,7 +1,10 @@
 
 import logo from '../../assets/logo.png'
 import avatar from '../../assets/avatar.png'
-import {Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
+import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import BookIcon from '@material-ui/icons/Book';
+import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 
 
 const Header = () => {
@@ -21,9 +24,28 @@ const Header = () => {
                     <Link to="">Contact Us</Link>
                 </ul>
             </div>
-            <div className='col-span-1 flex flex-row items-center justify-end'>
-                <img src={avatar} alt="" className='rounded-full w-10 mr-2 p-[2px]' />
-                <span>Hieu Nguyen</span>
+
+            <div className='col-span-1 flex flex-row items-center justify-end relative '>
+                <div className='group'>
+                    <img src={avatar} alt="" className='rounded-full w-10 mr-2 p-[2px] ' />
+                    <div className=' absolute top-11 right-5 border-2 bg-white hidden  group-hover:block  		'>
+                        <ul>
+                            <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 '>
+                                <AccountCircleIcon className='my-2 mx-2' />
+                                <span className='my-2 mx-2 '>Profile</span>
+                            </li>
+                            <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 '>
+                                <BookIcon className='m-2' />
+                                <span className='m-2'>My blog</span>
+                            </li>
+                            <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 '>
+                                <ExitToAppIcon className='m-2' />
+                                <span className='m-2'>Sign out</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <span className=''>Hieu Nguyen</span>
             </div>
         </div>
     )
