@@ -19,6 +19,9 @@ import Accordion from '@material-ui/core/Accordion';
 import AccordionSummary from '@material-ui/core/AccordionSummary';
 import AccordionDetails from '@material-ui/core/AccordionDetails';
 import Typography from '@material-ui/core/Typography';
+import LockIcon from '@material-ui/icons/Lock';
+import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
+import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 
 import SimpleBar from 'simplebar-react';
 import PropTypes from 'prop-types';
@@ -80,7 +83,7 @@ const Lesson = () => {
         // console.log(infoItemCourse);
         setInfoItem(infoItemCourse.data)
 
-        // console.log(await info.data);
+        console.log(await info.data);
 
 
         setInfoCourse(await info.data)
@@ -200,7 +203,7 @@ const Lesson = () => {
                     {listCourse.map((list, index) => {
                         return (
                             <div className='w-full' key={index}>
-                                <Accordion style={{ backgroundColor: '#f7f8fa' }}>
+                                <Accordion style={{ backgroundColor: '#f7f8fa' }} expanded={list.id === idPart}>
                                     <AccordionSummary
                                         expandIcon={<ExpandMoreIcon />}
                                         aria-controls="panel1a-content"
@@ -209,22 +212,31 @@ const Lesson = () => {
                                         <Typography className={classes.heading}>{extendFunction.romanize(index + 1) + '. ' + list.title}</Typography>
                                         <Typography className={classes.video}>({list.item.length} {list.item.length > 1 ? 'videos' : 'video'})</Typography>
                                     </AccordionSummary>
-                                    <AccordionDetails style={{ padding: '0' }}>
+                                    <AccordionDetails style={{ padding: '0',backgroundColor:'white' }}>
                                         <div className='w-full'>
                                             {list.item && list.item.length !== 0 ? list.item.map((course, index) => (
                                                 <Link
                                                     key={index}
                                                     to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id}`}
-                                                    className={clsx('flex items-center justify-end w-full px-1 cursor-pointer hover:bg-slate-300', {
-                                                        'bg-slate-300': idItem === course.id
-                                                    })}
+
                                                 >
-                                                    <div className=' my-3 w-full '>
-                                                        <span className='mx-2 text-xs font-bold'>{index + 1}.</span>
-                                                        <span className=''>{course.name}</span>
-                                                    </div>
-                                                    <div>
-                                                        <p className='text-[#003663] font-bold'>{extendFunction.convertDuration(course.duration)}</p>
+                                                    <div className={clsx(' w-full  cursor-pointer hover:bg-slate-300', {
+                                                        'bg-slate-300': idItem === course.id
+                                                    })}>
+                                                        <div className='flex items-center justify-end px-3'>
+                                                            <div className='w-full '>
+                                                                <span className='mx-2 text-xs font-bold'>{index + 1}.</span>
+                                                                <span className=''>{course.name}</span>
+                                                            </div>
+                                                            <div>
+                                                                {/* <LockIcon style={{ width: '15px', height: '15px' }} /> */}
+                                                                <CheckCircleIcon style={{ width: '15px', height: '15px' ,color:'#5db85c'}} />
+                                                            </div>
+                                                        </div>
+                                                        <div className='flex items-center px-5 pb-1'>
+                                                            <PlayCircleFilledIcon style={{ width: '15px', height: '15px', color: '#888888' }} />
+                                                            <p className='text-[#003663] font-bold mx-1 text-sm'>{extendFunction.convertDuration(course.duration)}</p>
+                                                        </div>
                                                     </div>
                                                 </Link>
                                             )) : ''}
