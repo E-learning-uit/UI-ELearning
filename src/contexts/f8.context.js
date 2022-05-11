@@ -20,4 +20,12 @@ export default class ELearningContext{
         const response = api.get(`/list-item/${idItem}`);
         return response;
     }
+    async getListCommentCourse(idCourse){
+        const response = api.get(`/list-comment-course/${idCourse}`);
+        return response;
+    }
+    async getListCommentItem(idItem){
+        const response = api.get(`/list-comment-item/${idItem}`);
+        return response;
+    }
 }

@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import ELearningContext from '../contexts/f8.context';
+import ListLesson from '../components/ListLesson';
 
 import { makeStyles } from '@material-ui/core/styles';
 import Accordion from '@material-ui/core/Accordion';
@@ -10,6 +11,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExtendFunction from '../utils/extendFunction';
 
+import Comment from '../components/Comment';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -82,53 +84,15 @@ const Course = () => {
                 <div className={classes.root}>
                     {listCourse.map((list, index) => {
                         return (
-                            <Accordion>
-                                <AccordionSummary
-                                    expandIcon={<ExpandMoreIcon />}
-                                    aria-controls="panel1a-content"
-                                    id="panel1a-header"
-                                >
-                                    <Typography className={classes.heading}>{extendFunction.romanize(index + 1) + '. ' + list.title}</Typography>
-                                    <Typography className={classes.video}>({list.item.length} {list.item.length > 1 ? 'videos' : 'video'})</Typography>
-                                </AccordionSummary>
-                                <AccordionDetails>
-                                    <div className='w-full'>
-                                        {list.item && list.item.length !== 0 ? list.item.map((course, index) => (
-                                            <Link
-                                                to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id}`}
-                                                className='flex items-center justify-end w-full cursor-pointer'
-                                            >
-                                                <div className='flex items-center my-3 w-full'>
-                                                    <p className='mx-2 text-xs font-bold'>{index + 1}.</p>
-                                                    <img src={course.thumbnail} alt="" className='w-[100px] h-[50px] mr-3' />
-                                                    <p className=''>{course.name}</p>
-                                                </div>
-                                                <div>
-                                                    <p className='text-[#003663] font-bold'>{extendFunction.convertDuration(course.duration)}</p>
-                                                </div>
-                                            </Link>
-                                        )) : ''}
-                                    </div>
-                                </AccordionDetails>
-                            </Accordion>
+                            <div key={index}>
+                                <ListLesson props={{ idCourse, list, index }} />
+                            </div>
                         )
                     })}
                 </div>
-                {/* {listCourse.map((list, index) => {
-                    return (
-                        <div>
-                            <p className='text-[#003663] font-bold my-4'>I {list.title}</p>
-                            <div>
-                                {list.item && list.item.length !== 0 ? list.item.map((course, index) => (
-                                    <div className='flex items-center my-3'>
-                                        <img src={course.thumbnail} alt="" className='w-[200px] h-[100px] mr-3' />
-                                        <p className='text-[#666666]'>{course.name}</p>
-                                    </div>
-                                )) : ''}
-                            </div>
-                        </div>
-                    )
-                })} */}
+            </div>
+            <div className='w-2/4 mx-5'>
+                <Comment props={{ idCourse }} />
             </div>
         </>
     )
