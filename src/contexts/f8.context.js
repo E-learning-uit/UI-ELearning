@@ -9,23 +9,37 @@ export default class ELearningContext{
         return response;
     }
     async getAllCourses(){
-        const response = api.get('/category-item');
+        const response = api.get('/courses');
+        return response;
+    }
+    async getInfoCourseDefault(idCourse){
+        const response = api.get(`/course/default/${idCourse}`);
         return response;
     }
     async getInfoCourse(idCourse){
-        const response = api.get(`/list-course/${idCourse}`);
+        let data1 = JSON.parse(localStorage.getItem('eLearning_data'));
+        if (!data1) return new Error();
+        api.defaults.headers.Authorization = "Bearer " + data1.token;
+        const response = api.get(`/course/${idCourse}`);
         return response;
     }
     async getInfoItem(idItem){
-        const response = api.get(`/list-item/${idItem}`);
+        const response = api.get(`/item/${idItem}`);
         return response;
     }
     async getListCommentCourse(idCourse){
-        const response = api.get(`/list-comment-course/${idCourse}`);
+        const response = api.get(`/comments/course/${idCourse}`);
         return response;
     }
     async getListCommentItem(idItem){
-        const response = api.get(`/list-comment-item/${idItem}`);
+        const response = api.get(`/comments/item/${idItem}`);
+        return response;
+    }
+    async updateLessonUser(idCourse,idItem){
+        let data1 = JSON.parse(localStorage.getItem('eLearning_data'));
+        if (!data1) return new Error();
+        api.defaults.headers.Authorization = "Bearer " + data1.token;
+        const response = api.put(`/lesson/user`,{idCourse,idItem});
         return response;
     }
 }

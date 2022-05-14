@@ -34,14 +34,14 @@ const Home = () => {
             <div>
                 {categoryCourse.map((item, index) => {
                     return (
-                        <div className="mt-3">
+                        <div className="mt-3" key={index}>
                             <h2 className="text-[28px] font-medium text-[#003663]">{item.title}</h2>
                             <SimpleBar>
                                 <div className="flex flex-row my-[24px]">
                                     {
                                         item.data.map((course, index) => {
                                             return (
-                                                <Link to={`/course/${course.id}`} className="ml-[16px] first:ml-0">
+                                                <Link to={`/course/${course.id}`} className="ml-[16px] first:ml-0" key={index}>
                                                     <div className="w-[294px] h-[165px]">
                                                         <img src={course.thumbnail} alt="" />
                                                     </div>

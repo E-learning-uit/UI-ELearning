@@ -34,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 
-const ListLesson = ({props}) => {
-    const {idCourse,list,index,idItem} = props;
+const ListLesson = ({ props }) => {
+    const { idCourse, list, index, idItem } = props;
     const classes = useStyles()
     const extendFunction = new ExtendFunction();
 
@@ -56,10 +56,14 @@ const ListLesson = ({props}) => {
                         <Link
                             key={index}
                             to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id}`}
-
+                            className={clsx({
+                                'pointer-events-none': !course.isLearned,
+                                'pointer-events-auto': course.isLearned,
+                            })}
                         >
                             <div className={clsx(' w-full  cursor-pointer hover:bg-slate-300', {
-                                'bg-slate-300': (idItem && idItem === course.id)? true : false
+                                'bg-slate-300': (idItem && idItem === course.id && course.isLearned) ? true : false,
+                                'bg-gray-300': !course.isLearned,
                             })}>
                                 <div className='flex items-center justify-end px-3'>
                                     <div className='w-full '>
@@ -67,8 +71,12 @@ const ListLesson = ({props}) => {
                                         <span className=''>{course.name}</span>
                                     </div>
                                     <div>
-                                        {/* <LockIcon style={{ width: '15px', height: '15px' }} /> */}
-                                        <CheckCircleIcon style={{ width: '15px', height: '15px', color: '#5db85c' }} />
+                                        {
+                                            course.isLearned ?
+                                                <CheckCircleIcon style={{ width: '15px', height: '15px', color: '#5db85c' }} />
+                                                :
+                                                <LockIcon style={{ width: '15px', height: '15px' }} />
+                                        }
                                     </div>
                                 </div>
                                 <div className='flex items-center px-5 pb-1'>

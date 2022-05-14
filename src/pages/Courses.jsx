@@ -42,7 +42,13 @@ const Course = () => {
 
     useEffect(async () => {
         console.log(idCourse);
-        let info = await f8Context.getInfoCourse(idCourse)
+        let info = []
+        if(localStorage.getItem('eLearning_data')){
+            info = await f8Context.getInfoCourse(idCourse)
+        }
+        else{
+            info = await f8Context.getInfoCourseDefault(idCourse)
+        }
         setInfoCourse(await info.data)
         setListCourse(await info.data.listCourse)
         console.log(info.data);

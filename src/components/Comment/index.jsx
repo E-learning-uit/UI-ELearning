@@ -1,14 +1,37 @@
 import { useEffect, useState, useMemo, useRef } from 'react'
 import ELearningContext from '../../contexts/f8.context';
 import FaceIcon from '@material-ui/icons/Face';
-
+import swal from 'sweetalert';
 
 const Comment = ({ props }) => {
     const f8Context = new ELearningContext();
     const { idCourse, idItem } = props;
+    const [content, setContent] = useState('');
     const [listComment, setListComment] = useState([]);
 
+    const [accessComment, setAccessComment] = useState(false);
+
+
+    const handleCancel = () => {
+        if (localStorage.getItem('eLearning_data')) {
+            setContent('')
+        }
+        else{
+            swal("Oops!", 'Bạn cần đăng nhập để thực hiện tính năng này.', "error");
+        }
+    }
+    const handleComment = () => {
+        if (localStorage.getItem('eLearning_data')) {
+            
+        }
+        else{
+            swal("Oops!", 'Bạn cần đăng nhập để có thể bình luận.', "error");
+        }
+    }
     useEffect(async () => {
+        if (localStorage.getItem('eLearning_data')) {
+            setAccessComment(true)
+        }
         if (idCourse) {
             let data = await f8Context.getListCommentCourse(idCourse)
             setListComment(data.data)
@@ -29,13 +52,21 @@ const Comment = ({ props }) => {
                     <div className='w-full flex items-center'>
                         <FaceIcon style={{ width: '40px', height: '40px', color: 'orange', marginRight: '2px' }} />
                         <div className='w-full'>
-                            <input type="text" placeholder='Bạn có thắc mắc gì trong bài học này không ?' className='w-full p-2 ' style={{ outline: 'none' }} />
+                            <input
+                                type="text"
+                                value={content}
+                                onChange={(e) => setContent(e.target.value)}
+                                placeholder={accessComment ? 'Bạn có thắc mắc gì trong bài học này không ?' : 'Bạn cần đăng nhập để thực hiện tính năng này.'}
+                                disabled={!accessComment}
+                                className='w-full p-2 '
+                                style={{ outline: 'none' }}
+                            />
                             <hr />
                         </div>
                     </div>
                     <div className='flex justify-end my-1 mx-3'>
-                        <button className='hover:bg-gray-200 rounded-2xl text-gray-500 px-2 py-1 font-semibold mx-2'>Cancel</button>
-                        <button className='rounded-2xl text-white bg-orange-400 px-2 py-1 font-semibold hover:opacity-75'>Comment</button>
+                        <button className='hover:bg-gray-200 rounded-2xl text-gray-500 px-2 py-1 font-semibold mx-2' onClick={handleCancel}>Cancel</button>
+                        <button className='rounded-2xl text-white bg-orange-400 px-2 py-1 font-semibold hover:opacity-75' onClick={handleComment}>Comment</button>
                     </div>
                 </div>
                 <div>

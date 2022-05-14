@@ -7,8 +7,11 @@ import BookIcon from '@material-ui/icons/Book';
 import AccountCircleIcon from '@material-ui/icons/AccountCircle';
 import { GoogleLogin } from 'react-google-login';
 import ELearningContext from '../../contexts/f8.context';
+import { useNavigate } from 'react-router-dom';
+
 
 const Header = () => {
+    const navigate = useNavigate();
     const f8Context = new ELearningContext();
     const [user, setUser] = useState(false)
 
@@ -27,8 +30,9 @@ const Header = () => {
             setUser(false)
         });
     }
-    const handleSingOut = () => {
+    const handleSignOut = () => {
         localStorage.removeItem('eLearning_data')
+        navigate('/')
         setUser(false)
     }
     useEffect(() => {
@@ -73,7 +77,7 @@ const Header = () => {
                                         <BookIcon className='m-2' />
                                         <span className='m-2'>My blog</span>
                                     </li>
-                                    <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 '>
+                                    <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 ' onClick={handleSignOut}>
                                         <ExitToAppIcon className='m-2' />
                                         <span className='m-2'>Sign out</span>
                                     </li>
