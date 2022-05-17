@@ -49,23 +49,28 @@ let path = [
         component: configComponent(<BlogDetail />)
     },
     {
-        path: '/courses',
+        path: '/course/:idCourse',
         component: configComponent(<Courses />)
     },
-    {
-        path: '/lesson',
-        component: configComponent(<Lesson />)
-    },
+    // {
+    //     path: '/lesson/:idCourse',
+    //     component: configComponent(<Lesson />)
+    // },
     {
         path: '/my-course',
         component: configComponent(<MyCourse />)
     },
+    // {
+    //     path: '/*',
+    //     component: configComponent(<Home />)
+    // },
 ]
 
 
 function App() {
     return (
         <Routes>
+            <Route path="/lesson/:idCourse" element={<Lesson />} />
             {path.map((item, index) => {
                 return (
                     <Route path={item.path} element={item.component} key={index} />
