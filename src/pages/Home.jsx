@@ -31,7 +31,7 @@ const Home = () => {
             <div>
                 <img src={imageapp} alt="" />
             </div>
-            <div>
+            <div className="pt-[48px]">
                 {categoryCourse.map((item, index) => {
                     return (
                         <div className="mt-3" key={index}>
