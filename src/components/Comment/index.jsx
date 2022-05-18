@@ -2,32 +2,70 @@ import { useEffect, useState, useMemo, useRef } from 'react'
 import ELearningContext from '../../contexts/f8.context';
 import FaceIcon from '@material-ui/icons/Face';
 import swal from 'sweetalert';
+import { io } from "socket.io-client";
+import socketIOClient from "socket.io-client";
+
+
+
 
 const Comment = ({ props }) => {
+    const host = "http://localhost:4001";
     const f8Context = new ELearningContext();
     const { idCourse, idItem } = props;
+
     const [content, setContent] = useState('');
     const [listComment, setListComment] = useState([]);
-
     const [accessComment, setAccessComment] = useState(false);
-
+    const socketRef = useRef();
 
     const handleCancel = () => {
         if (localStorage.getItem('eLearning_data')) {
             setContent('')
         }
-        else{
+        else {
             swal("Oops!", 'Bạn cần đăng nhập để thực hiện tính năng này.', "error");
         }
     }
     const handleComment = () => {
         if (localStorage.getItem('eLearning_data')) {
-            
+            let idUser = JSON.parse(localStorage.getItem('eLearning_data')).id;
+            socketRef.current.emit('sendNewComment',
+                {
+                    idUser,
+                    content: content,
+                    idCourse: idCourse,
+                    idItem: idItem
+                });
+            setContent('')
         }
-        else{
+        else {
             swal("Oops!", 'Bạn cần đăng nhập để có thể bình luận.', "error");
         }
     }
+    // socket comment
+    useEffect(() => {
+        socketRef.current = socketIOClient.connect(host)
+
+        socketRef.current.on('getId', data => {
+            // setId(data)
+            console.log(data);
+        })
+
+        socketRef.current.on('receiveNewComment', data => {
+            console.log(data);
+            if (data.newComment) {
+                setListComment(oldComment => [data.newComment, ...oldComment])
+            }
+            else
+                swal("Oops!", 'Đã có lỗi xảy ra, vui lòng kiểm tra lại', "error");
+        })
+
+        return () => {
+            socketRef.current.disconnect();
+        };
+    }, [])
+
+    // initial data
     useEffect(async () => {
         if (localStorage.getItem('eLearning_data')) {
             setAccessComment(true)
@@ -35,14 +73,16 @@ const Comment = ({ props }) => {
         if (idCourse) {
             let data = await f8Context.getListCommentCourse(idCourse)
             setListComment(data.data)
-            console.log(data);
+            console.log('cmt course ', idCourse, ':', data);
         }
         else if (idItem) {
             let data = await f8Context.getListCommentItem(idItem)
             setListComment(data.data)
-            console.log(data);
+            console.log('cmt item ', idItem, ':', data);
         }
-    }, [])
+        else
+            console.warn('éo nhận đc cái id nào để show hết')
+    }, [window.location.href])
 
     return (
         <>

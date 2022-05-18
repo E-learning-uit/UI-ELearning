@@ -585,6 +585,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .mr-2 {
   margin-right: 0.5rem;
 }
+.mb-10 {
+  margin-bottom: 2.5rem;
+}
 .inline {
   display: inline;
 }
@@ -834,6 +837,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-1 {
   padding-bottom: 0.25rem;
+}
+.pb-10 {
+  padding-bottom: 2.5rem;
 }
 .text-center {
   text-align: center;

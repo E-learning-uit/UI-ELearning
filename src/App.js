@@ -52,10 +52,10 @@ let path = [
         path: '/course/:idCourse',
         component: configComponent(<Courses />)
     },
-    // {
-    //     path: '/lesson/:idCourse',
-    //     component: configComponent(<Lesson />)
-    // },
+    {
+        path: '/lesson/:idCourse',
+        component: configComponent(<Lesson />)
+    },
     {
         path: '/my-course',
         component: configComponent(<MyCourse />)

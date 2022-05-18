@@ -59,7 +59,7 @@ const Lesson = () => {
     const [infoItem, setInfoItem] = useState({});
 
     const handleUpdateLesson = async (e) => {
-        f8Context.updateLessonUser(idCourse,idItem)
+        f8Context.updateLessonUser(idCourse, idItem)
             .then(async res => {
                 console.log(res);
                 if (res.code === 200) {
@@ -155,8 +155,8 @@ const Lesson = () => {
                     </div>
                     <p className='text-[#003663] font-bold my-4 text-[23px] mx-2'>{infoItem.name}</p>
                     {/* comment */}
-                    <div className='px-2 mb-3'>
-                        <Comment props={{ idCourse }} />
+                    <div className='px-2 pb-10'>
+                        <Comment props={{ idItem: query.get('idItem') }} />
                     </div>
                 </div>
                 <div className="overflow-y-auto fixed top-11 bottom-0 right-0 w-[25%]">
