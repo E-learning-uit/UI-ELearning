@@ -75,7 +75,7 @@ const Course = () => {
         }
         setInfoCourse(await info.data)
         setListCourse(await info.data.listCourse)
-        console.log(info.data);
+        console.log(await info);
     }, [])
 
 

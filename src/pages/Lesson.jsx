@@ -51,7 +51,7 @@ const Lesson = () => {
     const { idCourse } = useParams();
     const query = useQuery();
 
-    const [checkVideoEnd, setCheckVideoEnd] = useState(false);
+    const [checkPermissionNewItem, setCheckPermissionNewItem] = useState(true);
     const [idItem, setIdItem] = useState('');
     const [idPart, setIdPart] = useState('');
     const [infoCourse, setInfoCourse] = useState({});
@@ -96,10 +96,6 @@ const Lesson = () => {
         }
     }, [window.location.href])
 
-    useEffect(() => {
-        console.log(checkVideoEnd);
-    }, [checkVideoEnd])
-
     return (
         <div>
             {/* header */}
@@ -111,7 +107,7 @@ const Lesson = () => {
                 </div>
                 <div className='flex items-center'>
                     <Box position="relative" display="inline-flex">
-                        <CircularProgress variant="determinate" value={11} />
+                        <CircularProgress variant="determinate" value={(infoCourse.totalLearned*100/infoCourse.totalCourses).toFixed(2)}/>
                         <Box
                             top={0}
                             left={0}
@@ -122,14 +118,11 @@ const Lesson = () => {
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Typography variant="caption" component="div" color="error">77%</Typography>
+                            <Typography variant="caption" component="div" color="error">{(infoCourse.totalLearned*100/infoCourse.totalCourses).toFixed(2)}</Typography>
                         </Box>
                     </Box>
                     <div className='mx-4'>
-                        <span className='text-white  text-base'>4</span>
-                        <span className='text-white  text-base'>/</span>
-                        <span className='text-white  text-base'>111</span>
-                        <span className='text-white  text-base'> Lessons</span>
+                        <span className='text-white  text-base'>{infoCourse.totalLearned} / {infoCourse.totalCourses} Lessons</span>
                     </div>
                     <div className='flex items-center mx-2'>
                         <HelpIcon style={{ width: '25px', height: '25px', color: 'white' }} />
@@ -150,7 +143,15 @@ const Lesson = () => {
                             width="100%" height="500px"
                             url={`https://www.youtube.com/embed/${idItem}`}
                             controls={true}
-                            onEnded={handleUpdateLesson}
+                            // onEnded={handleUpdateLesson}
+                            onProgress={(e) => {
+                                console.log(e.playedSeconds);
+                                if(e.playedSeconds >= 120 && checkPermissionNewItem){
+                                    console.log('checkPermissionNewItem');
+                                    handleUpdateLesson()
+                                    setCheckPermissionNewItem(false)
+                                }
+                            }}
                         />
                     </div>
                     <p className='text-[#003663] font-bold my-4 text-[23px] mx-2'>{infoItem.name}</p>

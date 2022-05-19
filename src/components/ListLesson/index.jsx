@@ -55,7 +55,7 @@ const ListLesson = ({ props }) => {
                     {list.item && list.item.length !== 0 ? list.item.map((course, index) => (
                         <Link
                             key={index}
-                            to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id}`}
+                            to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id_part}`}
                             className={clsx({
                                 'pointer-events-none': !course.isLearned,
                                 'pointer-events-auto': course.isLearned,

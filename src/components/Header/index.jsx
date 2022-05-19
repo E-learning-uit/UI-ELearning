@@ -1,4 +1,4 @@
-import { useState,useEffect } from 'react'
+import { useState, useEffect } from 'react'
 import logo from '../../assets/logo.png'
 import avatar from '../../assets/avatar.png'
 import { Link } from 'react-router-dom'
@@ -65,6 +65,7 @@ const Header = () => {
             <div className='col-span-1 flex flex-row items-center justify-end relative '>
                 {user ? (
                     <div className=' flex items-center'>
+                        <span className='mx-2'>{user.name}</span>
                         <div className='group'>
                             <img src={user.avatar_url} alt="" className='rounded-full w-10 mr-2 p-[2px] ' />
                             <div className=' absolute top-11 right-5 border-2 bg-white hidden  group-hover:block  		'>
@@ -84,7 +85,6 @@ const Header = () => {
                                 </ul>
                             </div>
                         </div>
-                        <span className=''>{user.name}</span>
                     </div>
                 ) : (
                     <GoogleLogin
