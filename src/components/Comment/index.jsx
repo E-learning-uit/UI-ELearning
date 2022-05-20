@@ -113,9 +113,18 @@ const Comment = ({ props }) => {
                     {listComment.map((item, index) => (
                         <div className='flex my-3' key={index}>
                             <img src={item.avatarUser} alt="" className='rounded-full w-10 h-10 p-[2px] mx-1' />
-                            <div className='bg-[#f2f3f5] rounded-lg'>
-                                <p className='px-4 font-semibold text-[#b89a9b]'>{item.nameUser}</p>
-                                <p className="text-[#b89a9b] px-4 text-[15px]">{item.content}</p>
+                            <div >
+                                <div className='bg-[#f2f3f5] rounded-lg py-2'>
+                                    <p className='px-2 font-semibold text-[#b89a9b]'>{item.nameUser}</p>
+                                    <p className="px-2 text-[15px]">{item.content}</p>
+                                </div>
+                                <div className='text-[#efa48d] text-sm'>
+                                    <button className='mx-1 text-xs'>Thích</button>
+                                    <span>.</span>
+                                    <button className='mx-1 text-xs'>Trả lời</button>
+                                    <span>.</span>
+                                    <span className='text-[#adadad] text-xs mx-1'>{item.created_at}</span>
+                                </div>
                             </div>
                         </div>
                     ))}
