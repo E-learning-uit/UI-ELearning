@@ -9,7 +9,7 @@ import socketIOClient from "socket.io-client";
 
 
 const Comment = ({ props }) => {
-    const host = "http://localhost:4001";
+    const host = global.config.API;
     const f8Context = new ELearningContext();
     const { idCourse, idItem } = props;
 

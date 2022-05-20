@@ -56,7 +56,7 @@ const ListLesson = ({ props }) => {
                         <Link
                             key={index}
                             to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id_part}`}
-                            className={clsx({
+                            className={clsx('block',{
                                 'pointer-events-none': !course.isLearned,
                                 'pointer-events-auto': course.isLearned,
                             })}
