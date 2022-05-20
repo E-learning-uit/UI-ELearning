@@ -94,6 +94,7 @@ const Lesson = () => {
             setInfoCourse(info.data)
             setListCourse(info.data.listCourse)
         }
+        setCheckPermissionNewItem(true)
     }, [window.location.href])
 
     return (
