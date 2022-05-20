@@ -67,8 +67,12 @@ const ListLesson = ({ props }) => {
                             })}>
                                 <div className='flex items-center justify-end px-3'>
                                     <div className='w-full '>
-                                        <span className='mx-2 text-xs font-bold'>{index + 1}.</span>
-                                        <span className=''>{course.name}</span>
+                                        <span className={clsx('mx-2 text-xs font-bold', {
+                                            'text-slate-400	': !course.isLearned,
+                                        })}>{index + 1}.</span>
+                                        <span className={clsx({
+                                            'text-slate-400	': !course.isLearned,
+                                        })}>{course.name}</span>
                                     </div>
                                     <div>
                                         {
@@ -81,7 +85,12 @@ const ListLesson = ({ props }) => {
                                 </div>
                                 <div className='flex items-center px-5 pb-1'>
                                     <PlayCircleFilledIcon style={{ width: '15px', height: '15px', color: '#888888' }} />
-                                    <p className='text-[#003663] font-bold mx-1 text-sm'>{extendFunction.convertDuration(course.duration)}</p>
+                                    {
+                                        course.isLearned ?
+                                            <p className='text-[#003663] font-bold mx-1 text-sm'>{extendFunction.convertDuration(course.duration)}</p>
+                                            :
+                                            <p className='text-slate-400	 font-bold mx-1 text-sm'>{extendFunction.convertDuration(course.duration)}</p>
+                                    }
                                 </div>
                             </div>
                         </Link>
