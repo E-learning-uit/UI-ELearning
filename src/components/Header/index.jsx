@@ -55,10 +55,10 @@ const Header = () => {
             </div>
             <div className='col-span-2'>
                 <ul className='flex flex-row justify-around	items-center h-full'>
-                    <Link to="/">Home</Link>
-                    <Link to="/my-course">My Courses</Link>
-                    <Link to="/blog">Blog</Link>
-                    <Link to="">Contact Us</Link>
+                    <Link to="/" className="font-sans font-bold">Home</Link>
+                    <Link to="/my-course" className="font-sans font-bold">My Courses</Link>
+                    <Link to="/blog" className="font-sans font-bold">Blog</Link>
+                    <Link to="" className="font-sans font-bold">Contact Us</Link>
                 </ul>
             </div>
 
@@ -68,23 +68,24 @@ const Header = () => {
                         <span className='mx-2'>{user.name}</span>
                         <div className='group'>
                             <img src={user.avatar_url} alt="" className='rounded-full w-10 mr-2 p-[2px] ' />
-                            <div className=' absolute top-11 right-5 border-2 bg-white hidden  group-hover:block  		'>
+                            <div className="absolute min-w-[150px] top-[100%] right-[25%] translate-x-[75%] border-2 bg-white hidden  group-hover:block before:content-[''] before:absolute before:w-[100%] before:h-[20px] before:top-[-10px] shadow-[0_3px_7px_0_rgba(0,0,0,0.01)]">
                                 <ul>
-                                    <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 '>
+                                    <li className='w-full flex items-center font-medium cursor-pointer hover:bg-slate-400 '>
                                         <AccountCircleIcon className='my-2 mx-2' />
                                         <span className='my-2 mx-2 '>Profile</span>
                                     </li>
-                                    <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 '>
+                                    <li className='w-full flex items-center font-medium cursor-pointer hover:bg-slate-400 '>
                                         <BookIcon className='m-2' />
                                         <span className='m-2'>My blog</span>
                                     </li>
-                                    <li className='flex items-center justify-between cursor-pointer hover:bg-slate-400 ' onClick={handleSignOut}>
+                                    <li className='w-full flex items-center font-medium cursor-pointer hover:bg-slate-400 ' onClick={handleSignOut}>
                                         <ExitToAppIcon className='m-2' />
                                         <span className='m-2'>Sign out</span>
                                     </li>
                                 </ul>
                             </div>
                         </div>
+
                     </div>
                 ) : (
                     <GoogleLogin
