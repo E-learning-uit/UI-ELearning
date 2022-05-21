@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import ELearningContext from '../contexts/f8.context';
 import ListLesson from '../components/ListLesson';
 
@@ -12,7 +12,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import ExtendFunction from '../utils/extendFunction';
 
 import Comment from '../components/Comment';
-
+import swal from 'sweetalert';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -34,24 +34,48 @@ const extendFunction = new ExtendFunction();
 const f8Context = new ELearningContext();
 
 const Course = () => {
+    const navigate = useNavigate();
     const classes = useStyles()
     const { idCourse } = useParams();
     let [infoCourse, setInfoCourse] = useState({});
     let [listCourse, setListCourse] = useState([]);
 
+    const handleLearnNewCourse = async () => {
+        if (localStorage.getItem('eLearning_data')) {
+            swal("Hãy cố gắng học thật tốt khóa học này nha!", {
+                buttons: ["Hủy bỏ", "Bắt đầu học!"],
+            })
+                .then(async (res) => {
+                    if (res) {
+                        let infoCourseUser = await f8Context.checkInfoCourseUser(idCourse);
+                        console.log(infoCourseUser);
+                        if (infoCourseUser) {
+                            navigate(`/lesson/${idCourse}?idItem=${infoCourseUser.data.idItem}&idPart=${infoCourseUser.data.idPart}`);
+                        }
+                        else {
+                            swal("Lỗi", "Đã có lỗi xảy ra, vui lòng thử lại sau.", "warning");
+                        }
+                    }
+                })  
+        }
+        else {
+            swal("Oops!", 'Bạn cần đăng nhập để có thể bắt đầu học.', "error");
+        }
+
+    }
 
     useEffect(async () => {
         console.log(idCourse);
         let info = []
-        if(localStorage.getItem('eLearning_data')){
+        if (localStorage.getItem('eLearning_data')) {
             info = await f8Context.getInfoCourse(idCourse)
         }
-        else{
+        else {
             info = await f8Context.getInfoCourseDefault(idCourse)
         }
         setInfoCourse(await info.data)
         setListCourse(await info.data.listCourse)
-        console.log(info.data);
+        console.log(await info);
     }, [])
 
 
@@ -61,7 +85,7 @@ const Course = () => {
                 <br />
                 <div className='flex items-center justify-between'>
                     <h1 className="text-[#003663] font-bold mb-5 text-[40px] items-center">{infoCourse.title}</h1>
-                    <button className=' bg-[orange] rounded-[20px]  px-7 font-bold text-[#003663] h-12 text-xl'>Discover lesson</button>
+                    <button className=' bg-[orange] rounded-[20px]  px-7 font-bold text-[#003663] h-12 text-xl' onClick={handleLearnNewCourse}>Discover lesson</button>
                 </div>
                 <div className="grid grid-cols-3 px-3 py-3 mt-2 rounded-lg border-2 border-slate-400">
                     <div className="col-span-2">

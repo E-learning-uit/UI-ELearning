@@ -14,7 +14,7 @@ import PlayCircleFilledIcon from '@material-ui/icons/PlayCircleFilled';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import clsx from 'clsx';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-
+import CreateIcon from '@material-ui/icons/Create';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -55,8 +55,8 @@ const ListLesson = ({ props }) => {
                     {list.item && list.item.length !== 0 ? list.item.map((course, index) => (
                         <Link
                             key={index}
-                            to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id}`}
-                            className={clsx({
+                            to={`/lesson/${idCourse}?idItem=${course.id}&idPart=${list.id_part}`}
+                            className={clsx('block', {
                                 'pointer-events-none': !course.isLearned,
                                 'pointer-events-auto': course.isLearned,
                             })}
@@ -67,8 +67,16 @@ const ListLesson = ({ props }) => {
                             })}>
                                 <div className='flex items-center justify-end px-3'>
                                     <div className='w-full '>
-                                        <span className='mx-2 text-xs font-bold'>{index + 1}.</span>
-                                        <span className=''>{course.name}</span>
+                                        <span
+                                            className={clsx('mx-2 text-xs font-bold', {
+                                                'text-slate-400	': !course.isLearned,
+                                            })}
+                                        >{index + 1}.</span>
+                                        <span
+                                            className={clsx({
+                                                'text-slate-400	': !course.isLearned,
+                                            })}
+                                        >{course.name}</span>
                                     </div>
                                     <div>
                                         {
@@ -81,7 +89,17 @@ const ListLesson = ({ props }) => {
                                 </div>
                                 <div className='flex items-center px-5 pb-1'>
                                     <PlayCircleFilledIcon style={{ width: '15px', height: '15px', color: '#888888' }} />
-                                    <p className='text-[#003663] font-bold mx-1 text-sm'>{extendFunction.convertDuration(course.duration)}</p>
+                                    <p
+                                        className={clsx('font-bold mx-1 text-sm', {
+                                            'text-[#003663] ': course.isLearned,
+                                            'text-slate-400': !course.isLearned,
+                                        })}
+                                    >{extendFunction.convertDuration(course.duration)}</p>
+                                    {course.assignment ?
+                                        <CreateIcon style={{ width: '15px', height: '15px', color: '#888888' }} />
+                                        :
+                                        null
+                                    }
                                 </div>
                             </div>
                         </Link>

@@ -28,11 +28,11 @@ export default class ELearningContext{
         return response;
     }
     async getListCommentCourse(idCourse){
-        const response = api.get(`/comments/course/${idCourse}`);
+        const response = api.get(`/comments/course?idCourse=${idCourse}`);
         return response;
     }
     async getListCommentItem(idItem){
-        const response = api.get(`/comments/item/${idItem}`);
+        const response = api.get(`/comments/item?idItem=${idItem}`);
         return response;
     }
     async updateLessonUser(idCourse,idItem){
@@ -40,6 +40,20 @@ export default class ELearningContext{
         if (!data1) return new Error();
         api.defaults.headers.Authorization = "Bearer " + data1.token;
         const response = api.put(`/lesson/user`,{idCourse,idItem});
+        return response;
+    }
+    async checkInfoCourseUser(idCourse){
+        let data1 = JSON.parse(localStorage.getItem('eLearning_data'));
+        if (!data1) return new Error();
+        api.defaults.headers.Authorization = "Bearer " + data1.token;
+        const response = api.get(`/course/user/${idCourse}`);
+        return response;
+    }
+    async getListAssignment(idItem){
+        let data1 = JSON.parse(localStorage.getItem('eLearning_data'));
+        if (!data1) return new Error();
+        api.defaults.headers.Authorization = "Bearer " + data1.token;
+        const response = api.get(`/courses/assignments/${idItem}`);
         return response;
     }
 }
