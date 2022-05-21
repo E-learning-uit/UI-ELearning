@@ -71,12 +71,16 @@ const Header = () => {
                             <div className="absolute min-w-[150px] top-[100%] right-[25%] translate-x-[75%] border-2 bg-white hidden  group-hover:block before:content-[''] before:absolute before:w-[100%] before:h-[20px] before:top-[-10px] shadow-[0_3px_7px_0_rgba(0,0,0,0.01)]">
                                 <ul>
                                     <li className='w-full flex items-center font-medium cursor-pointer hover:bg-slate-400 '>
-                                        <AccountCircleIcon className='my-2 mx-2' />
-                                        <span className='my-2 mx-2 '>Profile</span>
+                                        <Link to={'/my-profile'}>
+                                            <AccountCircleIcon className='my-2 mx-2' />
+                                            <span className='my-2 mx-2 '>Profile</span>
+                                        </Link>
                                     </li>
                                     <li className='w-full flex items-center font-medium cursor-pointer hover:bg-slate-400 '>
-                                        <BookIcon className='m-2' />
-                                        <span className='m-2'>My blog</span>
+                                        <Link to={'/my-course'}>
+                                            <BookIcon className='m-2' />
+                                            <span className='m-2'>My Course</span>
+                                        </Link>
                                     </li>
                                     <li className='w-full flex items-center font-medium cursor-pointer hover:bg-slate-400 ' onClick={handleSignOut}>
                                         <ExitToAppIcon className='m-2' />
