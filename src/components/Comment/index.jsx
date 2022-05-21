@@ -106,7 +106,7 @@ const Comment = ({ props }) => {
                     </div>
                     <div className='flex justify-end my-1 mx-3'>
                         <button className='hover:bg-gray-200 rounded-2xl text-gray-500 px-2 py-1 font-semibold mx-2' onClick={handleCancel}>Cancel</button>
-                        <button className='rounded-2xl text-white bg-orange-400 px-2 py-1 font-semibold hover:opacity-75' onClick={handleComment}>Comment</button>
+                        <button className='rounded-2xl text-white bg-orange-500 px-2 py-1 font-semibold hover:opacity-75' onClick={handleComment}>Comment</button>
                     </div>
                 </div>
                 <div>
@@ -114,8 +114,8 @@ const Comment = ({ props }) => {
                         <div className='flex my-3' key={index}>
                             <img src={item.avatarUser} alt="" className='rounded-full w-10 h-10 p-[2px] mx-1' />
                             <div >
-                                <div className='bg-[#f2f3f5] rounded-lg py-2'>
-                                    <p className='px-2 font-semibold text-[#b89a9b]'>{item.nameUser}</p>
+                                <div className='bg-[#f2f3f5] rounded-lg'>
+                                    <p className='px-2 font-semibold text-[#b89a9b] mb-1'>{item.nameUser}</p>
                                     <p className="px-2 text-[15px]">{item.content}</p>
                                 </div>
                                 <div className='text-[#efa48d] text-sm'>

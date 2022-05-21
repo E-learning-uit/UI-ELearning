@@ -8,6 +8,7 @@ import ExtendFunction from '../utils/extendFunction';
 import ELearningContext from '../contexts/f8.context';
 import ListLesson from '../components/ListLesson';
 import Comment from '../components/Comment';
+import Assignment from '../components/Assignment';
 
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import HelpIcon from '@material-ui/icons/Help';
@@ -21,6 +22,7 @@ import Typography from '@material-ui/core/Typography';
 import clsx from 'clsx';
 import ReactPlayer from 'react-player'
 import swal from 'sweetalert';
+
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -52,11 +54,13 @@ const Lesson = () => {
     const query = useQuery();
 
     const [checkPermissionNewItem, setCheckPermissionNewItem] = useState(true);
+    const [checkAssignment, setCheckAssignment] = useState(false);
     const [idItem, setIdItem] = useState('');
     const [idPart, setIdPart] = useState('');
     const [infoCourse, setInfoCourse] = useState({});
     const [listCourse, setListCourse] = useState([]);
     const [infoItem, setInfoItem] = useState({});
+    const [checkAssignmentItem, setCheckAssignmentItem] = useState(null);
 
     const handleUpdateLesson = async (e) => {
         f8Context.updateLessonUser(idCourse, idItem)
@@ -86,10 +90,10 @@ const Lesson = () => {
 
             let info = await f8Context.getInfoCourse(idCourse)
             let infoItemCourse = await f8Context.getInfoItem(query.get('idItem'))
-            // console.log(infoItemCourse);
+            console.log('infoItemCourse: ', infoItemCourse);
 
-            console.log(await info.data);
-
+            console.log('data item:', await info.data);
+            setCheckAssignmentItem(infoItemCourse.data.assignment)
             setInfoItem(infoItemCourse.data)
             setInfoCourse(info.data)
             setListCourse(info.data.listCourse)
@@ -108,7 +112,7 @@ const Lesson = () => {
                 </div>
                 <div className='flex items-center'>
                     <Box position="relative" display="inline-flex">
-                        <CircularProgress variant="determinate" value={(infoCourse.totalLearned*100/infoCourse.totalCourses).toFixed(2)}/>
+                        <CircularProgress variant="determinate" value={(infoCourse.totalLearned * 100 / infoCourse.totalCourses).toFixed(2)} />
                         <Box
                             top={0}
                             left={0}
@@ -119,7 +123,7 @@ const Lesson = () => {
                             alignItems="center"
                             justifyContent="center"
                         >
-                            <Typography variant="caption" component="div" color="error">{(infoCourse.totalLearned*100/infoCourse.totalCourses).toFixed(2)}</Typography>
+                            <Typography variant="caption" component="div" color="error">{(infoCourse.totalLearned * 100 / infoCourse.totalCourses).toFixed(2)}</Typography>
                         </Box>
                     </Box>
                     <div className='mx-4'>
@@ -139,27 +143,42 @@ const Lesson = () => {
             {/* video */}
             <div className="grid grid-cols-4  w-full">
                 <div className="col-span-3">
-                    <div className=''>
-                        <ReactPlayer
-                            width="100%" height="500px"
-                            url={`https://www.youtube.com/embed/${idItem}`}
-                            controls={true}
-                            // onEnded={handleUpdateLesson}
-                            onProgress={(e) => {
-                                console.log(e.playedSeconds);
-                                if(e.playedSeconds >= 120 && checkPermissionNewItem){
-                                    console.log('checkPermissionNewItem');
-                                    handleUpdateLesson()
-                                    setCheckPermissionNewItem(false)
-                                }
-                            }}
-                        />
-                    </div>
-                    <p className='text-[#003663] font-bold my-4 text-[23px] mx-2'>{infoItem.name}</p>
-                    {/* comment */}
-                    <div className='px-2 pb-10'>
-                        <Comment props={{ idItem: query.get('idItem') }} />
-                    </div>
+                    {
+                        !checkAssignment ?
+                            <div>
+                                <div className=''>
+                                    <ReactPlayer
+                                        width="100%" height="500px"
+                                        url={`https://www.youtube.com/embed/${idItem}`}
+                                        controls={true}
+                                        // onEnded={handleUpdateLesson}
+                                        onProgress={(e) => {
+                                            console.log(e.playedSeconds);
+                                            if (e.playedSeconds >= 120 && checkPermissionNewItem) {
+                                                console.log('checkPermissionNewItem');
+                                                handleUpdateLesson()
+                                                setCheckPermissionNewItem(false)
+                                            }
+                                        }}
+                                    />
+                                </div>
+                                <div className='flex items-center justify-between'>
+                                    <p className='text-[#003663] font-bold my-4 text-[23px] mx-2'>{infoItem.name}</p>
+                                    {
+                                        checkAssignmentItem ?
+                                            <p onClick={() => setCheckAssignment(true)} className='mx-5 bg-amber-400 cursor-pointer py-1 px-2 rounded-xl text-white font-semibold hover:opacity-70'>Làm bài tập !</p>
+                                            :
+                                            null
+                                    }
+                                </div>
+                                {/* comment */}
+                                <div className='px-2 pb-10'>
+                                    <Comment props={{ idItem: query.get('idItem') }} />
+                                </div>
+                            </div>
+                            :
+                            <Assignment props={{ idItem, setCheckAssignment }} />
+                    }
                 </div>
                 <div className="overflow-y-auto fixed top-11 bottom-0 right-0 w-[25%]">
                     <p className='text-[#003663] font-bold text-2xl p-2'>List lessons</p>

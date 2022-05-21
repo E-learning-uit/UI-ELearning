@@ -49,4 +49,11 @@ export default class ELearningContext{
         const response = api.get(`/course/user/${idCourse}`);
         return response;
     }
+    async getListAssignment(idItem){
+        let data1 = JSON.parse(localStorage.getItem('eLearning_data'));
+        if (!data1) return new Error();
+        api.defaults.headers.Authorization = "Bearer " + data1.token;
+        const response = api.get(`/courses/assignments/${idItem}`);
+        return response;
+    }
 }
