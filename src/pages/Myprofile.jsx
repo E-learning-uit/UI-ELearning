@@ -22,8 +22,7 @@ const MyProfile = () => {
     
     useEffect(async () => {
         if (localStorage.getItem('eLearning_data')) {
-            let data = JSON.parse(localStorage.getItem('eLearning_data'))
-            let infoUser = await f8Context.getInfoUser(data.id)
+            let infoUser = await f8Context.getInfoUser()
             console.log('infoUser:', infoUser);
             // setUserInfo(infoUser.data);
         }
