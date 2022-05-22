@@ -50,7 +50,7 @@ const Header = () => {
     return (
         <div className="fixed top-0 left-0 right-0 z-10  text-[#003663] font-bold grid grid-cols-4 px-8 shadow-md h-12 bg-white	">
             <div className='col-span-1 flex'>
-                <img src={logo} alt="" className='rounded-full w-11 flex items-center' />
+                <img src={logo} alt="" className='rounded-full w-11 h-11 flex items-center' />
                 <span className='flex items-center text-[#F7941E] text-[20px]'>E-CODE</span>
             </div>
             <div className='col-span-2'>
@@ -67,7 +67,7 @@ const Header = () => {
                     <div className=' flex items-center'>
                         <span className='mx-2'>{user.name}</span>
                         <div className='group'>
-                            <img src={user.avatar_url} alt="" className='rounded-full w-10 mr-2 p-[2px] ' />
+                            <img src={user.avatar_url} alt="" className='rounded-full w-10 h-10 mr-2 p-[2px] ' />
                             <div className="absolute min-w-[150px] top-[100%] right-[25%] translate-x-[75%] border-2 bg-white hidden  group-hover:block before:content-[''] before:absolute before:w-[100%] before:h-[20px] before:top-[-10px] shadow-[0_3px_7px_0_rgba(0,0,0,0.01)]">
                                 <ul>
                                     <li className='w-full flex items-center font-medium cursor-pointer hover:bg-slate-400 '>

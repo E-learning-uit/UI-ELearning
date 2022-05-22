@@ -77,8 +77,4 @@ export default class ELearningContext {
         const response = api.get(`/users/courses`);
         return response;
     }
-    async sendMail(name, email, message, phone) {
-        const response = api.post(`/mail`, { name, email, message, phone });
-        return response;
-    }
 }
