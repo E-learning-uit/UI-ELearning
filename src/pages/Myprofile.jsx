@@ -110,11 +110,11 @@ const MyProfile = () => {
                     </div>
                     <div>
                         <h2 className="text-[#003663] text-[24px] font-bold py-2">Courses attended</h2>
-                        <div className="flex flex-col">
+                        <div className="flex flex-row">
                             {
                                 data.map((item, index) => {
                                     return (
-                                        <div className=' flex mb-5'>
+                                        <div className='mb-5'>
                                             {
                                                 item.data && item.data.length > 0 ?
                                                     item.data.map((course, index) => (
