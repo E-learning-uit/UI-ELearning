@@ -510,6 +510,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 .col-span-3 {
   grid-column: span 3 / span 3;
 }
+.float-right {
+  float: right;
+}
 .m-auto {
   margin: auto;
 }
@@ -574,6 +577,18 @@ Ensure the default browser behavior of the `hidden` attribute.
 .my-2 {
   margin-top: 0.5rem;
   margin-bottom: 0.5rem;
+}
+.my-5 {
+  margin-top: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+.mx-6 {
+  margin-left: 1.5rem;
+  margin-right: 1.5rem;
+}
+.mx-20 {
+  margin-left: 5rem;
+  margin-right: 5rem;
 }
 .mt-12 {
   margin-top: 3rem;
@@ -650,9 +665,6 @@ Ensure the default browser behavior of the `hidden` attribute.
 .h-\[165px\] {
   height: 165px;
 }
-.h-\[200px\] {
-  height: 200px;
-}
 .h-\[260px\] {
   height: 260px;
 }
@@ -661,6 +673,12 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .h-full {
   height: 100%;
+}
+.h-5 {
+  height: 1.25rem;
+}
+.h-9 {
+  height: 2.25rem;
 }
 .max-h-\[260px\] {
   max-height: 260px;
@@ -691,6 +709,21 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .w-11 {
   width: 2.75rem;
+}
+.w-5 {
+  width: 1.25rem;
+}
+.w-9 {
+  width: 2.25rem;
+}
+.w-\[40\%\] {
+  width: 40%;
+}
+.w-1\/2 {
+  width: 50%;
+}
+.w-1\/3 {
+  width: 33.333333%;
 }
 .min-w-\[350px\] {
   min-width: 350px;
@@ -782,11 +815,20 @@ Ensure the default browser behavior of the `hidden` attribute.
 .rounded-\[10px\] {
   border-radius: 10px;
 }
+.rounded-sm {
+  border-radius: 0.125rem;
+}
+.rounded-md {
+  border-radius: 0.375rem;
+}
 .border-\[1px\] {
   border-width: 1px;
 }
 .border-2 {
   border-width: 2px;
+}
+.border {
+  border-width: 1px;
 }
 .border-solid {
   border-style: solid;
@@ -847,6 +889,15 @@ Ensure the default browser behavior of the `hidden` attribute.
 .bg-gray-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(209 213 219 / var(--tw-bg-opacity));
+}
+.bg-\[rgba\(96\2c 125\2c 139\2c \.2\)\] {
+  background-color: rgba(96,125,139,.2);
+}
+.bg-\[rgba\(255\2c 255\2c 255\2c 0\.7\)\] {
+  background-color: rgba(255,255,255,0.7);
+}
+.bg-\[rgba\(211\2c 211\2c 211\2c 0\.7\)\] {
+  background-color: rgba(211,211,211,0.7);
 }
 .object-cover {
   object-fit: cover;
@@ -943,6 +994,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   padding-left: 1.25rem;
   padding-right: 1.25rem;
 }
+.px-1 {
+  padding-left: 0.25rem;
+  padding-right: 0.25rem;
+}
 .pb-12 {
   padding-bottom: 3rem;
 }
@@ -960,6 +1015,9 @@ Ensure the default browser behavior of the `hidden` attribute.
 }
 .pb-1 {
   padding-bottom: 0.25rem;
+}
+.pt-4 {
+  padding-top: 1rem;
 }
 .text-center {
   text-align: center;
@@ -1032,6 +1090,14 @@ Ensure the default browser behavior of the `hidden` attribute.
 .text-sm {
   font-size: 0.875rem;
   line-height: 1.25rem;
+}
+.text-5xl {
+  font-size: 3rem;
+  line-height: 1;
+}
+.text-3xl {
+  font-size: 1.875rem;
+  line-height: 2.25rem;
 }
 .font-bold {
   font-weight: 700;
@@ -1110,6 +1176,10 @@ Ensure the default browser behavior of the `hidden` attribute.
   --tw-text-opacity: 1;
   color: rgb(173 173 173 / var(--tw-text-opacity));
 }
+.text-\[\#757575\] {
+  --tw-text-opacity: 1;
+  color: rgb(117 117 117 / var(--tw-text-opacity));
+}
 .shadow-md {
   --tw-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
   --tw-shadow-colored: 0 4px 6px -1px var(--tw-shadow-color), 0 2px 4px -2px var(--tw-shadow-color);
@@ -1156,6 +1226,10 @@ Ensure the default browser behavior of the `hidden` attribute.
 .hover\:border-slate-400:hover {
   --tw-border-opacity: 1;
   border-color: rgb(148 163 184 / var(--tw-border-opacity));
+}
+.hover\:border-slate-500:hover {
+  --tw-border-opacity: 1;
+  border-color: rgb(100 116 139 / var(--tw-border-opacity));
 }
 .hover\:bg-\[\#4682b4e6\]:hover {
   background-color: #4682b4e6;
