@@ -1,23 +1,25 @@
 import { useState } from 'react'
 import Ellipse12 from '../assets/Ellipse12.png'
 import { Link } from 'react-router-dom'
-
+import ava2 from '../assets/blog/ava2.jpg'
 
 const Blog = () => {
     const [blog, setBlog] = useState([
         {
             id: 1,
-            user_name: 'Kim Lien',
-            user_img: 'https://pbs.twimg.com/media/FGPdlo4VkAErCtK.png',
-            title: 'ReactJS with Typescript [Series]. Phần 1 Basic Typescript',
-            content: 'Chào các bạn cộng đồng lập trình f8 mình cũng là một thành viên.Hôm nay mình muốn viết một series về ReactJS kết hợp với typescript . Mình mong mọi người sẽ đón nhận và trao đổi kiến thức với nhau.Bài viết này sẽ viết về những điều tuyệt vời và hay ho khi làm việc với typescript nhé.'
+            user_name: 'Nguyên Đinh',
+            user_img: ava2,
+            title: 'Xử Lý Bất Đồng Bộ Trong Javascript - Phần 1',
+            content: 'Chắc chắn khi lập trình, bạn sẽ có các công việc cần thời gian delay (gọi API, lấy dữ liệu từ Database, đọc/ghi file,…)Và đây chính là lúc xử lý bất đồng bộ lên ngôi, hãy cùng mình tìm hiểu về bất đồng bộ trong Javascript và chúng giúp code dễ dàng hơn thế nào nhé.',
+            to:'/blog/first-blog'
         },
         {
             id: 2,
-            user_name: 'Kim Lien',
-            user_img: 'https://pbs.twimg.com/media/FGPdlo4VkAErCtK.png',
-            title: 'Rèn luyện tư duy và áp dụng kiến thức đã học vào thực hành',
-            content: 'Mình có đọc qua vài bình luận ở dưới một số video trong khóa JS cơ bản và thấy một số bạn muốn có thêm bài tập thực hành (cụ thể là phần mảng/array và vòng lặp/loop), ngoài ra mình thấy khóa đó anh Sơn cũng chưa nói nhiều về phương pháp tư duy cũng như thuật toán nên mình muốn chia sẻ tới các bạn một số keyword để research cũng như thực hành để cải thiện kỹ năng bản thân (ngoài ra cũng test luôn chức năng viết blog xD trên F8)'
+            user_name: 'Ho Binh',
+            user_img: ava2,
+            title: 'ReactJS with Typescript [Series].Phần 1 Basic Typescript',
+            content: 'Chào các bạn cộng đồng lập trình f8 mình cũng là một thành viên.Hôm nay mình muốn viết một series về ReactJS kết hợp với typescript . Mình mong mọi người sẽ đón nhận và trao đổi kiến thức với nhau.Bài viết này sẽ viết về những điều tuyệt vời và hay ho khi làm việc với typescript nhé.',
+            to:'/blog/second-blog'
         },{
             id: 3,
             user_name: 'Kim Lien',
@@ -44,7 +46,7 @@ const Blog = () => {
             <h1 className='text-[#003663] text-[31px] py-4 font-bold'>Featured Posts</h1>
             <span className="text-[17px] text-slate-400 font-light">Synthesize shared articles about self-study online programming and web programming techniques.</span>
             {blog.map(item => (
-                <Link to='/blog-detail'>
+                <Link to={item.to ? item.to : '/blog-detail'}>
                     <div className="rounded-2xl border-[1px] border-inherit mt-12 px-6 py-8">
                         <div className="flex flex-row text-center items-center">
                             <img className="w-10 h-10 rounded-full" src={item.user_img} alt="" />
