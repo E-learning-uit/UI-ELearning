@@ -154,7 +154,7 @@ const Lesson = () => {
                                         // onEnded={handleUpdateLesson}
                                         onProgress={(e) => {
                                             console.log(e.playedSeconds);
-                                            if (e.playedSeconds >= 120 && checkPermissionNewItem) {
+                                            if (e.playedSeconds >= 60 && checkPermissionNewItem) {
                                                 console.log('checkPermissionNewItem');
                                                 handleUpdateLesson()
                                                 setCheckPermissionNewItem(false)

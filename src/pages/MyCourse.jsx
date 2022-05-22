@@ -1,61 +1,47 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.css';
 
-
+import ELearningContext from '../contexts/f8.context';
 const MyCourse = () => {
-    const [data, setData] = useState([
-        {
-            name: 'hieu'
-        },
-        {
-            name: 'hieu'
-        },
-        {
-            name: 'hieu'
-        },
-        {
-            name: 'hieu'
-        },
-        {
-            name: 'hieu'
-        },
-        {
-            name: 'hieu'
-        },
-        {
-            name: 'hieu'
-        },
-    ]);
+    const f8Context = new ELearningContext();
+    const [data, setData] = useState([]);
 
+    useEffect(async () => {
+        let data = await f8Context.getInfoLearnedCourse()
+        console.log(data);
+        setData(data.data)
+    }, [])
     return (
         <div>
             <br />
-            <div className='px-14 '>
-                <h1 className="text-[#003663] font-bold mb-5 text-[30px] items-center">Front-end Courses</h1>
-                <SimpleBar>
-                    <div className=' flex mb-5'>
-                        {data.map((item, index) => (
-                            <div className='first:ml-0 ml-5  w-[350px] min-w-[350px] relative ' >
-                                <img src={'https://img.youtube.com/vi/6mFmtgYVsh4/maxresdefault.jpg'} alt="" className='w-full ' />
-                                <p className=' absolute top-1/2 left-1/2  font-bold text-[20px] text-[#003663]   rounded-full bg-[rgba(255,255,255,0.5)] p-2' style={{ transform: 'translate(-50%,-50%)' }}>50%</p>
+            {data.map((item, index) => {
+                return (
+                    <div className='px-14 '>
+                        <h1 className="text-[#003663] font-bold mb-5 text-[30px] items-center">{item.title}</h1>
+                        <SimpleBar>
+                            <div className=' flex mb-5'>
+                                {
+                                    item.data && item.data.length > 0 ?
+                                        item.data.map((course, index) => (
+                                            <Link to={`/course/${course.idCourse}`} className='first:ml-0 ml-5  w-[350px] min-w-[350px] relative hover:opacity-75' >
+                                                <img src={course.thumbnail} alt="" className='w-full ' />
+                                                <p
+                                                    className=' absolute top-1/2 left-1/2  font-bold text-[20px] text-[#003663]   rounded-full bg-[rgba(255,255,255,0.5)] p-2'
+                                                    style={{ transform: 'translate(-50%,-50%)' }}
+                                                >{Number(course.learned * 100 / course.totalLesson).toFixed(0) + '%'}</p>
+                                            </Link>
+                                        ))
+                                        :
+                                        null
+                                }
                             </div>
-                        ))}
+                        </SimpleBar>
                     </div>
-                </SimpleBar>
-            </div>
-            <br />
-            <div className='px-14 '>
-                <h1 className="text-[#003663] font-bold mb-5 text-[30px] items-center">Back-end Courses</h1>
-                <SimpleBar>
-                    <div className='flex  w-full mb-5'>
-                        {data.map((item, index) => (
-                            <img src={`https://img.youtube.com/vi/6mFmtgYVsh4/maxresdefault.jpg`} alt="" className="w-[350px] h-[200px] ml-5 first:ml-0" />
-                        ))}
-                    </div>
-                </SimpleBar>
-            </div>
+                )
+            })}
         </div>
     )
 }

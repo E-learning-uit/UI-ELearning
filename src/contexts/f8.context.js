@@ -70,4 +70,11 @@ export default class ELearningContext{
         const response = api.put(`/users`,data);
         return response;
     }
+    async getInfoLearnedCourse(){
+        let data1 = JSON.parse(localStorage.getItem('eLearning_data'));
+        if (!data1) return new Error();
+        api.defaults.headers.Authorization = "Bearer " + data1.token;
+        const response = api.get(`/users/courses`);
+        return response;
+    }
 }
