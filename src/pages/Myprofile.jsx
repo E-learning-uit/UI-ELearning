@@ -1,12 +1,13 @@
 import { useEffect, useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import EventIcon from '@material-ui/icons/Event';
 import EditIcon from '@material-ui/icons/Edit';
 import AddIcon from '@material-ui/icons/Add';
 import ELearningContext from '../contexts/f8.context';
-import { useNavigate } from 'react-router-dom';
 
 const MyProfile = () => {
     const navigate = useNavigate();
+    const navigation = useNavigate();
     const f8Context = new ELearningContext();
     const [userInfo, setUserInfo] = useState({
         avatar_url: '',
@@ -17,6 +18,17 @@ const MyProfile = () => {
 
 
     // code ở đây
+    const [data, setData] = useState([]);
+    useEffect(async () => {
+        if (localStorage.getItem('eLearning_data')) {
+            let data = await f8Context.getInfoLearnedCourse()
+            console.log(data);
+            setData(data.data)
+        }
+        else {
+            navigation('/')
+        }
+    }, [])
     const [avatar, setAvatar] = useState()
     const [courses, setCourses] = useState([])
     const [categoryCourse, setCategoryCourse] = useState([]);
@@ -25,7 +37,7 @@ const MyProfile = () => {
         console.log(listCourse);
         setCategoryCourse(listCourse)
     }, [])
-    
+
     useEffect(async () => {
         if (localStorage.getItem('eLearning_data')) {
             let infoUser = await f8Context.getInfoUser()
@@ -45,11 +57,11 @@ const MyProfile = () => {
     const handlePreviewAvt = (e) => {
         const file = e.target.files[0]
         var reader = new FileReader();
-        reader.onloadend = function() {
-          console.log(reader.result)
+        reader.onloadend = function () {
+            console.log(reader.result)
         }
         reader.readAsDataURL(file);
-        
+
         file.preview = URL.createObjectURL(file)
 
         userInfo.avatar_url = file.preview;
@@ -64,7 +76,7 @@ const MyProfile = () => {
     // làm xong phải log hết ra xem đúng hết chưa !!!!!!!!!!!!!!!!!
     return (
         <div className="mx-[150px] my-[60px]">
-            <div className="pt-[36px]"> 
+            <div className="pt-[36px]">
                 <h2 className="text-[#003663] text-[31px] py-4 font-bold">My profille</h2>
                 <div className='grid grid-cols-[1fr_2fr]'>
                     <div className="flex flex-col pl-40 pr-16 justify-center">
@@ -72,7 +84,7 @@ const MyProfile = () => {
                             <img className="w-full h-full object-cover rounded-full" src={userInfo.avatar_url} alt="" />
                             <div className="absolute bottom-3 left-3/4 px-2 py-2 text-[8px] rounded-full bg-slate-400 bg-opacity-80  cursor-pointer text-white">
                                 <EditIcon className="" />
-                                <input type="file" className="absolute opacity-0 overflow-hidden top-2/4 left-[30%] translate-x-[-20%] translate-y-[-50%]" style={{'opacity': '0'}}  onChange={handlePreviewAvt}  />
+                                <input type="file" className="absolute opacity-0 overflow-hidden top-2/4 left-[30%] translate-x-[-20%] translate-y-[-50%]" style={{ 'opacity': '0' }} onChange={handlePreviewAvt} />
                             </div>
                         </div>
                         <form>
@@ -99,15 +111,34 @@ const MyProfile = () => {
                     <div>
                         <h2 className="text-[#003663] text-[24px] font-bold py-2">Courses attended</h2>
                         <div className="flex flex-col">
-                            <div className="grid grid-cols-[1fr_2fr]">
-                                <div className="">
-                                    <img src="" alt="" />
-                                </div>
-                                <div>
-                                    <h3></h3>
-                                    <p></p>
-                                </div>
-                            </div>
+                            {
+                                data.map((item, index) => {
+                                    return (
+                                        <div className=' flex mb-5'>
+                                            {
+                                                item.data && item.data.length > 0 ?
+                                                    item.data.map((course, index) => (
+                                                        <div className="grid grid-cols-[2fr_3fr] bg-slate-100 px-4 py-4">
+                                                            <div className="rounded overflow-hidden">
+                                                                <Link to={`/course/${course.idCourse}`} className='first:ml-0 ml-5  w-[350px] min-w-[350px] relative' >
+                                                                    <img src={course.thumbnail} alt="" className='w-full ' />
+                                                                </Link>
+                                                            </div>
+                                                            <div className="ml-4">
+                                                                <h3 className="text-2xl font-semibold">
+                                                                    <a href="">{course.title}</a>
+                                                                </h3>
+                                                                <span className="text-s">{course.description}</span>
+                                                            </div>
+                                                        </div>
+                                                    ))
+                                                    :
+                                                    null
+                                            }
+                                        </div>
+                                    )
+                                })
+                            }
                         </div>
                     </div>
                 </div>

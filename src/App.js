@@ -20,6 +20,7 @@ import ContactUs from './pages/ContactUs'
 import Header from './components/Header'
 import Footer from './components/Footer'
 import SecondBlog from './components/Blog/SecondBlog'
+import FirstBlog from './components/Blog/FirstBlog'
 
 
 const configComponent = (component) => {
@@ -70,6 +71,10 @@ let path = [
     {
         path: '/blog/second-blog',
         component: configComponent(<SecondBlog />)
+    },
+    {
+        path: '/blog/first-blog',
+        component: configComponent(<FirstBlog />)
     }
 ]
 
