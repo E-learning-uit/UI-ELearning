@@ -15,9 +15,11 @@ import Courses from './pages/Courses'
 import Lesson from './pages/Lesson'
 import MyCourse from './pages/MyCourse'
 import MyProfile from './pages/MyProfile'
+import ContactUs from './pages/ContactUs'
 // const component
 import Header from './components/Header'
 import Footer from './components/Footer'
+import SecondBlog from './components/Blog/SecondBlog'
 
 
 const configComponent = (component) => {
@@ -42,6 +44,10 @@ let path = [
         component: configComponent(<Home />)
     },
     {
+        path: '/contact-us',
+        component: configComponent(<ContactUs />)
+    },
+    {
         path: '/blog',
         component: configComponent(<Blog />)
     },
@@ -60,7 +66,11 @@ let path = [
     {
         path: '/my-profile',
         component: configComponent(<MyProfile />)
-    }       
+    },
+    {
+        path: '/blog/second-blog',
+        component: configComponent(<SecondBlog />)
+    }
 ]
 
 
