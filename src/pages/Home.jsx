@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom';
 
 
 
-const f8Context = new ELearningContext();
 const Home = () => {
-    let navigate = useNavigate();
+    const f8Context = new ELearningContext();
+    const navigate = useNavigate();
     const [categoryCourse, setCategoryCourse] = useState([]);
     useEffect(async () => {
         let listCourse = await f8Context.getAllCourses();

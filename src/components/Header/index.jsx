@@ -16,6 +16,7 @@ const Header = () => {
     const [user, setUser] = useState(false)
 
     const googleResponse = (response) => {
+        console.log('hieuhieu')
         f8Context.login({ providerToken: response.tokenId }).then((res) => {
             console.log(res);
             let data = res.data
