@@ -1,0 +1,1 @@
+export const COURSE_PAID = 1000000

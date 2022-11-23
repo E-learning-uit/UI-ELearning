@@ -39,8 +39,7 @@ const Course = () => {
     const { idCourse } = useParams();
     let [infoCourse, setInfoCourse] = useState({});
     let [listCourse, setListCourse] = useState([]);
-
-    const handleLearnNewCourse = async () => {
+    const handleLearnCourse = async () => {
         if (localStorage.getItem('eLearning_data')) {
             swal("Hãy cố gắng học thật tốt khóa học này nha!", {
                 buttons: ["Hủy bỏ", "Bắt đầu học!"],
@@ -56,12 +55,28 @@ const Course = () => {
                             swal("Lỗi", "Đã có lỗi xảy ra, vui lòng thử lại sau.", "warning");
                         }
                     }
-                })  
+                })
         }
         else {
             swal("Oops!", 'Bạn cần đăng nhập để có thể bắt đầu học.', "error");
         }
-
+    }
+    const handleBuyCourse = () => {
+        swal(`Khóa học này đang có giá là ${infoCourse.amount} vnd, bạn có muốn mua không?`, {
+            buttons: ["Hủy bỏ", "Mua khóa học"],
+        })
+            .then((res) => {
+                if (res) {
+                    navigate(`/payment/${idCourse}`)
+                }
+            })
+    }
+    const handleLearnNewCourse = async () => {
+        if (infoCourse.amount > 0 && infoCourse.paid) {
+            await handleLearnCourse()
+        } else {
+            handleBuyCourse()
+        }
     }
 
     useEffect(async () => {
@@ -83,11 +98,20 @@ const Course = () => {
         <>
             <div className="px-[40px]">
                 <br />
-                <div className='flex items-center justify-between'>
-                    <h1 className="text-[#003663] font-bold mb-5 text-[40px] items-center">{infoCourse.title}</h1>
-                    <button className=' bg-[orange] rounded-[20px]  px-7 font-bold text-[#003663] h-12 text-xl' onClick={handleLearnNewCourse}>Discover lesson</button>
+                <div className='flex items-center justify-between mb-4'>
+                    <div className='flex items-center gap-2'>
+                        <p className="text-[#003663] font-bold text-[40px] items-center">{infoCourse.title}</p>
+                        {
+                            infoCourse.amount > 0 &&
+                            <img
+                                className=' w-10 h-10 shadow-md rounded  p-1'
+                                src={'https://fullstack.edu.vn/static/media/crown_icon.3e4800f7485935ab6ea312a7080a85fe.svg'} alt=""
+                            />
+                        }
+                    </div>
+                    <button className=' bg-[orange] rounded-[20px]  px-7 font-bold text-[#003663] h-12 text-xl hover:shadow-md' onClick={handleLearnNewCourse}>Discover lesson</button>
                 </div>
-                <div className="grid grid-cols-3 px-3 py-3 mt-2 rounded-lg border-2 border-slate-400">
+                <div className="grid grid-cols-3 px-3 py-3 mt-2 rounded-lg shadow-md">
                     <div className="col-span-2">
                         <img src={infoCourse.thumbnail} alt="" className="w-full px-[80px] h-[400px]" />
                     </div>

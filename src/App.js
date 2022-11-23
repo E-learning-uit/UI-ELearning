@@ -21,7 +21,7 @@ import Header from './components/Header'
 import Footer from './components/Footer'
 import SecondBlog from './components/Blog/SecondBlog'
 import FirstBlog from './components/Blog/FirstBlog'
-
+import Payment from "./pages/Payment";
 
 const configComponent = (component) => {
     return (
@@ -75,6 +75,10 @@ let path = [
     {
         path: '/blog/first-blog',
         component: configComponent(<FirstBlog />)
+    },
+    {
+        path: '/payment/:idCourse',
+        component: configComponent(<Payment />)
     }
 ]
 

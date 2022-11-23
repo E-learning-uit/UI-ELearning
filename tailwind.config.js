@@ -1,6 +1,6 @@
 module.exports = {
     content: [
-      "./src/**/*.{js,jsx,ts,tsx}",
+        "./src/**/*.{js,jsx,ts,tsx}",
     ],
     variants: {
         extend: {
@@ -8,9 +8,11 @@ module.exports = {
         },
     },
     theme: {
-      extend: {
-        
-      },
+        extend: {
+            colors: {
+                'primary': '#f05123'
+            }
+        },
     },
     plugins: [],
-  }
+}

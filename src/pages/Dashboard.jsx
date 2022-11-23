@@ -4,16 +4,16 @@ import SimpleBar from 'simplebar-react';
 import 'simplebar/dist/simplebar.css';
 import { Link } from 'react-router-dom';
 import intro from '../assets/intro.jpg'
+import { COURSE_PAID } from '../config/const';
 
-
-const f8Context = new ELearningContext();
 const DashBoard = () => {
-   
-    const [categoryCourse, setCategoryCourse] = useState([]);
+    const f8Context = new ELearningContext();
+
+    const [categoryCourses, setCategoryCourses] = useState([]);
     useEffect(async () => {
         let listCourse = await f8Context.getAllCourses();
         console.log(listCourse);
-        setCategoryCourse(listCourse)
+        setCategoryCourses(listCourse)
     }, [])
     return (
         <div className="py-[60px] px-[150px]">
@@ -31,20 +31,36 @@ const DashBoard = () => {
             </div>
             <div id="courses">
                 {
-                    categoryCourse.map((item, index) => {
+                    categoryCourses.map((categoryCourse, index) => {
                         return (
                             <div className="pt-[48px]" key={index}>
-                                <h2 className="text-[28px] font-medium text-[#003663]">{item.title}</h2>
+                                <h2 className="text-[28px] font-medium text-[#003663]">{categoryCourse.title}</h2>
                                 <SimpleBar>
                                     <div className="flex flex-row my-[24px]">
                                         {
-                                            item.data.map((item, index) => {
+                                            categoryCourse.data.map((course, index) => {
                                                 return (
-                                                    <Link to={`/course/${item.id}`} className="ml-[16px] first:ml-0" key={index}>
-                                                        <div className="w-[294px] h-[165px]">
-                                                            <img src={item.thumbnail} alt="" />
+                                                    <Link to={`/course/${course.id}`} className="ml-[16px] first:ml-0" key={index}>
+                                                        <div className="w-[294px] h-[165px] relative rounded">
+                                                            <img src={course.thumbnail} alt="" className='rounded-md' />
+                                                            {
+                                                                course.amount > 0 &&
+                                                                <img
+                                                                    className='absolute top-2 left-2 w-6 h-6 rounded bg-black p-1'
+                                                                    src={'https://fullstack.edu.vn/static/media/crown_icon.3e4800f7485935ab6ea312a7080a85fe.svg'} alt=""
+                                                                />
+                                                            }
                                                         </div>
-                                                        <h5 className="text-[16px] font-medium mt-2">{item.title}</h5>
+                                                        <div>
+                                                            <p className="text-[16px] font-medium mt-2">{course.title}</p>
+                                                            {
+                                                                course.amount > 0 &&
+                                                                <div className='flex items-center gap-3'>
+                                                                    <p className=' text-sm font-bold line-through	'>{String(course.amount).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} vnd</p>
+                                                                    <p className='text-primary text-sm font-bold'>{String(Number(course.amount) * Number(course.discount ? course.discount : 1) / 100).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')} vnd</p>
+                                                                </div>
+                                                            }
+                                                        </div>
                                                     </Link>
                                                 )
                                             })
