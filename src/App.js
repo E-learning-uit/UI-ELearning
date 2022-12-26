@@ -10,7 +10,7 @@ import Dashboard from './pages/Dashboard'
 import Home from './pages/Home'
 import Lesson from './pages/Lesson'
 import MyCourse from './pages/MyCourse'
-import MyProfile from './pages/MyProfile'
+import MyProfile from './pages/Myprofile'
 // const component
 import FirstBlog from './components/Blog/FirstBlog'
 import SecondBlog from './components/Blog/SecondBlog'
