@@ -19,7 +19,7 @@ const Vietqr = (props) => {
         let data = await paymentContext.checkPayment({ encodeId, accountNumber: '1230103032001' })
         console.log(data.message);
         if (data.message == 'success') {
-            navigate(`/course/`)
+            navigate(`/course/8`)
         } else {
 
         }
@@ -60,7 +60,7 @@ const Vietqr = (props) => {
                     <div className='my-8'>
                         <div className='flex gap-1 my-3'>
                             <p>Ngân hàng: </p>
-                            <b>VietinBank</b>
+                            <b>MB Bank</b>
                         </div>
                         <div className='flex gap-1 my-3'>
                             <p>Chủ tài khoản</p>
@@ -68,7 +68,7 @@ const Vietqr = (props) => {
                         </div>
                         <div className='flex gap-1 my-3'>
                             <p>Số tài khoản</p>
-                            <b>105875113711</b>
+                            <b>1230103032001</b>
                         </div>
                         <div className='flex gap-1 my-3'>
                             <p>Số tiền:</p>

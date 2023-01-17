@@ -34,7 +34,7 @@ const Course = () => {
   const { idCourse } = useParams()
   let [infoCourse, setInfoCourse] = useState({})
   let [listCourse, setListCourse] = useState([])
-  const handleLearnCourse = async () => {
+  const handleLearnCourse =  () => {
     if (localStorage.getItem('eLearning_data')) {
       swal('Hãy cố gắng học thật tốt khóa học này nha!', {
         buttons: ['Hủy bỏ', 'Bắt đầu học!'],
@@ -56,7 +56,7 @@ const Course = () => {
     }
   }
   const handleBuyCourse = () => {
-    swal(`Khóa học này đang có giá là ${infoCourse.amount} vnd, bạn có muốn mua không?`, {
+    swal(`Khóa học này đang có giá là ${String(infoCourse.amount).replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') } vnd, bạn có muốn mua không?`, {
       buttons: ['Hủy bỏ', 'Mua khóa học'],
     }).then((res) => {
       if (res) {
@@ -65,10 +65,10 @@ const Course = () => {
     })
   }
   const handleLearnNewCourse = async () => {
-    if ((infoCourse.amount > 0 && infoCourse.paid) || true) {
-      await handleLearnCourse()
-    } else {
+    if (infoCourse.amount > 0 && !infoCourse.paid) {
       handleBuyCourse()
+    } else {
+      handleLearnCourse()
     }
   }
 
