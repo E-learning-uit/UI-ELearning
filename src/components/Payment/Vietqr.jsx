@@ -6,6 +6,8 @@ import PaymentContext from '../../contexts/payment.context';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { ACCOUNT_NUMBER, NAME_BANK, SHORT_NAME_BANK } from '../../config/const';
+import swal from 'sweetalert';
 const Vietqr = (props) => {
     // redux
     const dispatch = useDispatch();
@@ -16,12 +18,17 @@ const Vietqr = (props) => {
     const paymentContext = new PaymentContext()
     const { setShowDialogVietqr } = props
     const handlePayment = async () => {
-        let data = await paymentContext.checkPayment({ encodeId, accountNumber: '1230103032001' })
-        console.log(data.message);
-        if (data.message == 'success') {
-            navigate(`/course/8`)
-        } else {
-
+        try {
+            let data = await paymentContext.checkPayment({ encodeId, accountNumber: String(ACCOUNT_NUMBER) })
+            console.log(data.message);
+            if (data.message == 'success') {
+                navigate(`/course/8`)
+            } else {
+    
+            }
+            
+        } catch (error) {
+            swal('Có lỗi xảy ra, vui lòng thử lại sau.')
         }
     }
     useEffect(() => {
@@ -50,7 +57,7 @@ const Vietqr = (props) => {
                     <p>Mở App ngân hàng quét QRCODE</p>
                     <img
                         // src={`https://img.vietqr.io/image/vietinbank-105875113711-compact.jpg?amount=1000&addInfo=${encodeId}`}
-                        src={`https://img.vietqr.io/image/mbbank-1230103032001-compact.jpg?amount=1000&addInfo=${encodeId}`}
+                        src={`https://img.vietqr.io/image/${SHORT_NAME_BANK}-${ACCOUNT_NUMBER}-compact.jpg?amount=1000&addInfo=${encodeId}`}
                         alt="" className='w-80 py-4'
                     />
                     <p>14 App ngân hàng hỗ trợ quét mã VietQR</p>
@@ -60,7 +67,7 @@ const Vietqr = (props) => {
                     <div className='my-8'>
                         <div className='flex gap-1 my-3'>
                             <p>Ngân hàng: </p>
-                            <b>MB Bank</b>
+                            <b>{NAME_BANK}</b>
                         </div>
                         <div className='flex gap-1 my-3'>
                             <p>Chủ tài khoản</p>
@@ -68,7 +75,7 @@ const Vietqr = (props) => {
                         </div>
                         <div className='flex gap-1 my-3'>
                             <p>Số tài khoản</p>
-                            <b>1230103032001</b>
+                            <b>{ACCOUNT_NUMBER}</b>
                         </div>
                         <div className='flex gap-1 my-3'>
                             <p>Số tiền:</p>
